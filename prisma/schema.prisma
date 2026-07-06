@@ -1,22 +1,62 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
-// TODO: Define your data models here
-// Example:
-// model User {
-//   id        Int      @id @default(autoincrement())
-//   email     String   @unique
-//   username  String   @unique
-//   password  String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  articles Article[]
+  comments Comment[]
+  subscriptions Subscription[]
+}
+
+model Article {
+  id        Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  article   String
+
+  userId    Int
+  author    User    @relation(fields: [userId], references: [id])
+
+  topicId   Int
+  topic     Topic     @relation(fields: [topicId], references: [id])
+
+  comments Comment[]
+
+}
+
+model Comment {
+    id        Int     @id @default(autoincrement())
+    comment String
+
+    userId    Int
+    author    User     @relation(fields: [userId], references: [id])
+
+    articleId Int
+    article  Article @relation(fields: [articleId], references: [id])
+}
+
+model Topic {
+  id        Int     @id @default(autoincrement())
+  name String
+  subscriptions Subscription[]
+  articles Article[]
+}
+
+model Subscription {
+  id        Int     @id @default(autoincrement())
+
+  userId    Int
+  subscriber    User    @relation(fields: [userId], references: [id])
+
+   topicId Int
+    topic  Topic @relation(fields: [topicId], references: [id])
+}
