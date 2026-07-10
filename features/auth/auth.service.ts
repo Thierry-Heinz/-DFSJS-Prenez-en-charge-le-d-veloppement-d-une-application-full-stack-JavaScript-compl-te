@@ -1,33 +1,18 @@
 import 'server-only';
+import { AuthService } from '@/types/auth-types';
+import { isValidEmail } from '@/lib/utils';
+import { authRepository } from './auth.repository';
 
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
+export const authService: AuthService = {
+  login: async function (identifier, password) {
+    const isEmail = isValidEmail(identifier);
+    let response;
 
-type LoginResult = Awaited<ReturnType<typeof auth.api.signInEmail>>;
-type Session = Awaited<ReturnType<typeof auth.api.getSession>>;
-
-interface AuthService {
-  login(email: string, password: string): Promise<LoginResult>;
-  logout(): Promise<{ success: boolean }>;
-  getSession(): Promise<Session>;
-}
-
-const authService: AuthService = {
-  login: async function (email, password) {
-    const response = await auth.api.signInEmail({
-      body: {
-        email,
-        password,
-      },
-    });
+    if (isEmail) {
+      response = await authRepository.loginWithEmail(identifier, password);
+    } else {
+      response = await authRepository.loginWithUsername(identifier, password);
+    }
     return response;
-  },
-
-  logout: async function () {
-    return await auth.api.signOut({ headers: await headers() });
-  },
-
-  getSession: async function () {
-    return await auth.api.getSession({ headers: await headers() });
   },
 };

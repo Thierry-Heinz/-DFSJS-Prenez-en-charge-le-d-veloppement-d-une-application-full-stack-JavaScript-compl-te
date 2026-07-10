@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Logo from '@/components/Logo/Logo';
+import Link from 'next/link';
 
 export const Home = () => {
   return (
@@ -6,13 +7,11 @@ export const Home = () => {
       <div className="text-center space-y-8">
         <div className="flex justify-center">
           <div className="bg-primary text-primary-foreground text-4xl font-bold px-8 py-4 rounded-2xl">
-            MDD
+            <Logo />
           </div>
         </div>
 
-        <h1 className="text-3xl font-bold text-foreground">
-          Monde de Dév
-        </h1>
+        <h1 className="text-3xl font-bold text-foreground">Monde de Dév</h1>
 
         <div className="flex gap-4">
           <Link
