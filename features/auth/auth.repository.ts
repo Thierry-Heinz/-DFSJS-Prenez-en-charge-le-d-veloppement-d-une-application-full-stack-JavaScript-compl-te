@@ -6,7 +6,7 @@ import { auth } from '@/lib/auth/auth';
 import { withBetterAuthErrorHandling } from './auth-error-mapper';
 
 export const authRepository: AuthRepository = {
-  loginWithEmail: async function (email, password) {
+  loginWithEmail: function (email, password) {
     return withBetterAuthErrorHandling(() =>
       auth.api.signInEmail({
         body: {
@@ -17,7 +17,7 @@ export const authRepository: AuthRepository = {
     );
   },
 
-  loginWithUsername: async function (username, password) {
+  loginWithUsername: function (username, password) {
     return withBetterAuthErrorHandling(() =>
       auth.api.signInUsername({
         body: {
@@ -28,13 +28,26 @@ export const authRepository: AuthRepository = {
     );
   },
 
-  logout: async function () {
+  logout: function () {
     return withBetterAuthErrorHandling(async () =>
       auth.api.signOut({ headers: await headers() }),
     );
   },
 
-  getSession: async function () {
+  register: function (username, email, password) {
+    return withBetterAuthErrorHandling(() =>
+      auth.api.signUpEmail({
+        body: {
+          email,
+          password,
+          name: username,
+          username,
+        },
+      }),
+    );
+  },
+
+  getSession: function () {
     return withBetterAuthErrorHandling(async () =>
       auth.api.getSession({ headers: await headers() }),
     );

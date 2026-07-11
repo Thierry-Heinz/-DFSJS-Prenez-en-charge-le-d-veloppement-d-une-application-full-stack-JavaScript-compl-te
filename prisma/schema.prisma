@@ -9,10 +9,11 @@ generator client {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
+  id            String            @id
   email         String         @unique
+  name          String
   username      String         @unique
-  password      String
+  displayUsername String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   posts         Post[]
@@ -22,7 +23,6 @@ model User {
   image         String?
   sessions      Session[]
   accounts      Account[]
-
   @@map("user")
 }
 
@@ -30,25 +30,19 @@ model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   post      String
-
-  userId Int
+  userId String
   author User @relation(fields: [userId], references: [id])
-
   topicId Int
   topic   Topic @relation(fields: [topicId], references: [id])
-
   comments Comment[]
   @@map("post")
-
 }
 
 model Comment {
   id      Int    @id @default(autoincrement())
   comment String
-
-  userId Int
+  userId String
   author User @relation(fields: [userId], references: [id])
-
   postId Int
   post   Post @relation(fields: [postId], references: [id])
   @@map("comment")
@@ -59,18 +53,16 @@ model Topic {
   name          String
   subscriptions Subscription[]
   posts         Post[]
-
   @@map("topic")
 }
 
 model Subscription {
   id Int @id @default(autoincrement())
-
-  userId     Int
+  userId     String
   subscriber User @relation(fields: [userId], references: [id])
-
   topicId Int
   topic   Topic @relation(fields: [topicId], references: [id])
+  @@map("subscription")
 }
 
 model Session {
@@ -81,7 +73,7 @@ model Session {
   updatedAt DateTime @updatedAt
   ipAddress String?
   userAgent String?
-  userId    Int
+  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([token])
   @@index([userId])
@@ -92,7 +84,7 @@ model Account {
   id                    String    @id
   accountId             String
   providerId            String
-  userId                Int
+  userId                String
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?

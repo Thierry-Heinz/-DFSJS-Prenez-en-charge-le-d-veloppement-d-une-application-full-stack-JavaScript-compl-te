@@ -28,25 +28,23 @@ export type AggregateSubscription = {
 
 export type SubscriptionAvgAggregateOutputType = {
   id: number | null
-  userId: number | null
   topicId: number | null
 }
 
 export type SubscriptionSumAggregateOutputType = {
   id: number | null
-  userId: number | null
   topicId: number | null
 }
 
 export type SubscriptionMinAggregateOutputType = {
   id: number | null
-  userId: number | null
+  userId: string | null
   topicId: number | null
 }
 
 export type SubscriptionMaxAggregateOutputType = {
   id: number | null
-  userId: number | null
+  userId: string | null
   topicId: number | null
 }
 
@@ -60,13 +58,11 @@ export type SubscriptionCountAggregateOutputType = {
 
 export type SubscriptionAvgAggregateInputType = {
   id?: true
-  userId?: true
   topicId?: true
 }
 
 export type SubscriptionSumAggregateInputType = {
   id?: true
-  userId?: true
   topicId?: true
 }
 
@@ -177,7 +173,7 @@ export type SubscriptionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type SubscriptionGroupByOutputType = {
   id: number
-  userId: number
+  userId: string
   topicId: number
   _count: SubscriptionCountAggregateOutputType | null
   _avg: SubscriptionAvgAggregateOutputType | null
@@ -206,7 +202,7 @@ export type SubscriptionWhereInput = {
   OR?: Prisma.SubscriptionWhereInput[]
   NOT?: Prisma.SubscriptionWhereInput | Prisma.SubscriptionWhereInput[]
   id?: Prisma.IntFilter<"Subscription"> | number
-  userId?: Prisma.IntFilter<"Subscription"> | number
+  userId?: Prisma.StringFilter<"Subscription"> | string
   topicId?: Prisma.IntFilter<"Subscription"> | number
   subscriber?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   topic?: Prisma.XOR<Prisma.TopicScalarRelationFilter, Prisma.TopicWhereInput>
@@ -225,7 +221,7 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SubscriptionWhereInput | Prisma.SubscriptionWhereInput[]
   OR?: Prisma.SubscriptionWhereInput[]
   NOT?: Prisma.SubscriptionWhereInput | Prisma.SubscriptionWhereInput[]
-  userId?: Prisma.IntFilter<"Subscription"> | number
+  userId?: Prisma.StringFilter<"Subscription"> | string
   topicId?: Prisma.IntFilter<"Subscription"> | number
   subscriber?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   topic?: Prisma.XOR<Prisma.TopicScalarRelationFilter, Prisma.TopicWhereInput>
@@ -247,7 +243,7 @@ export type SubscriptionScalarWhereWithAggregatesInput = {
   OR?: Prisma.SubscriptionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SubscriptionScalarWhereWithAggregatesInput | Prisma.SubscriptionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Subscription"> | number
-  userId?: Prisma.IntWithAggregatesFilter<"Subscription"> | number
+  userId?: Prisma.StringWithAggregatesFilter<"Subscription"> | string
   topicId?: Prisma.IntWithAggregatesFilter<"Subscription"> | number
 }
 
@@ -258,7 +254,7 @@ export type SubscriptionCreateInput = {
 
 export type SubscriptionUncheckedCreateInput = {
   id?: number
-  userId: number
+  userId: string
   topicId: number
 }
 
@@ -269,13 +265,13 @@ export type SubscriptionUpdateInput = {
 
 export type SubscriptionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   topicId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SubscriptionCreateManyInput = {
   id?: number
-  userId: number
+  userId: string
   topicId: number
 }
 
@@ -285,7 +281,7 @@ export type SubscriptionUpdateManyMutationInput = {
 
 export type SubscriptionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   topicId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -307,7 +303,6 @@ export type SubscriptionCountOrderByAggregateInput = {
 
 export type SubscriptionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
 }
 
@@ -325,7 +320,6 @@ export type SubscriptionMinOrderByAggregateInput = {
 
 export type SubscriptionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
 }
 
@@ -453,7 +447,7 @@ export type SubscriptionScalarWhereInput = {
   OR?: Prisma.SubscriptionScalarWhereInput[]
   NOT?: Prisma.SubscriptionScalarWhereInput | Prisma.SubscriptionScalarWhereInput[]
   id?: Prisma.IntFilter<"Subscription"> | number
-  userId?: Prisma.IntFilter<"Subscription"> | number
+  userId?: Prisma.StringFilter<"Subscription"> | string
   topicId?: Prisma.IntFilter<"Subscription"> | number
 }
 
@@ -463,7 +457,7 @@ export type SubscriptionCreateWithoutTopicInput = {
 
 export type SubscriptionUncheckedCreateWithoutTopicInput = {
   id?: number
-  userId: number
+  userId: string
 }
 
 export type SubscriptionCreateOrConnectWithoutTopicInput = {
@@ -513,7 +507,7 @@ export type SubscriptionUncheckedUpdateManyWithoutSubscriberInput = {
 
 export type SubscriptionCreateManyTopicInput = {
   id?: number
-  userId: number
+  userId: string
 }
 
 export type SubscriptionUpdateWithoutTopicInput = {
@@ -522,12 +516,12 @@ export type SubscriptionUpdateWithoutTopicInput = {
 
 export type SubscriptionUncheckedUpdateWithoutTopicInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SubscriptionUncheckedUpdateManyWithoutTopicInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -584,7 +578,7 @@ export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.Intern
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    userId: number
+    userId: string
     topicId: number
   }, ExtArgs["result"]["subscription"]>
   composites: {}
@@ -1012,7 +1006,7 @@ export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends run
  */
 export interface SubscriptionFieldRefs {
   readonly id: Prisma.FieldRef<"Subscription", 'Int'>
-  readonly userId: Prisma.FieldRef<"Subscription", 'Int'>
+  readonly userId: Prisma.FieldRef<"Subscription", 'String'>
   readonly topicId: Prisma.FieldRef<"Subscription", 'Int'>
 }
     

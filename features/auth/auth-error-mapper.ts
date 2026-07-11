@@ -14,6 +14,7 @@ export async function withBetterAuthErrorHandling<T>(
     return await fn();
   } catch (error) {
     if (error instanceof APIError) {
+      console.log(error.body);
       const key = betterAuthErrorMap[error.body?.code ?? ''];
       throw new AppError(
         key ? ErrorMessages[key] : ErrorMessages.UNKNOWN_AUTH_ERROR,

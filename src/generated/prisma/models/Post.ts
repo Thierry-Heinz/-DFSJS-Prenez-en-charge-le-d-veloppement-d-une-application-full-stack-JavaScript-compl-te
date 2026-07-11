@@ -28,13 +28,11 @@ export type AggregatePost = {
 
 export type PostAvgAggregateOutputType = {
   id: number | null
-  userId: number | null
   topicId: number | null
 }
 
 export type PostSumAggregateOutputType = {
   id: number | null
-  userId: number | null
   topicId: number | null
 }
 
@@ -42,7 +40,7 @@ export type PostMinAggregateOutputType = {
   id: number | null
   createdAt: Date | null
   post: string | null
-  userId: number | null
+  userId: string | null
   topicId: number | null
 }
 
@@ -50,7 +48,7 @@ export type PostMaxAggregateOutputType = {
   id: number | null
   createdAt: Date | null
   post: string | null
-  userId: number | null
+  userId: string | null
   topicId: number | null
 }
 
@@ -66,13 +64,11 @@ export type PostCountAggregateOutputType = {
 
 export type PostAvgAggregateInputType = {
   id?: true
-  userId?: true
   topicId?: true
 }
 
 export type PostSumAggregateInputType = {
   id?: true
-  userId?: true
   topicId?: true
 }
 
@@ -191,7 +187,7 @@ export type PostGroupByOutputType = {
   id: number
   createdAt: Date
   post: string
-  userId: number
+  userId: string
   topicId: number
   _count: PostCountAggregateOutputType | null
   _avg: PostAvgAggregateOutputType | null
@@ -222,7 +218,7 @@ export type PostWhereInput = {
   id?: Prisma.IntFilter<"Post"> | number
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   post?: Prisma.StringFilter<"Post"> | string
-  userId?: Prisma.IntFilter<"Post"> | number
+  userId?: Prisma.StringFilter<"Post"> | string
   topicId?: Prisma.IntFilter<"Post"> | number
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   topic?: Prisma.XOR<Prisma.TopicScalarRelationFilter, Prisma.TopicWhereInput>
@@ -247,7 +243,7 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PostWhereInput | Prisma.PostWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   post?: Prisma.StringFilter<"Post"> | string
-  userId?: Prisma.IntFilter<"Post"> | number
+  userId?: Prisma.StringFilter<"Post"> | string
   topicId?: Prisma.IntFilter<"Post"> | number
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   topic?: Prisma.XOR<Prisma.TopicScalarRelationFilter, Prisma.TopicWhereInput>
@@ -274,7 +270,7 @@ export type PostScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Post"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
   post?: Prisma.StringWithAggregatesFilter<"Post"> | string
-  userId?: Prisma.IntWithAggregatesFilter<"Post"> | number
+  userId?: Prisma.StringWithAggregatesFilter<"Post"> | string
   topicId?: Prisma.IntWithAggregatesFilter<"Post"> | number
 }
 
@@ -290,7 +286,7 @@ export type PostUncheckedCreateInput = {
   id?: number
   createdAt?: Date | string
   post: string
-  userId: number
+  userId: string
   topicId: number
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
 }
@@ -307,7 +303,7 @@ export type PostUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   topicId?: Prisma.IntFieldUpdateOperationsInput | number
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
 }
@@ -316,7 +312,7 @@ export type PostCreateManyInput = {
   id?: number
   createdAt?: Date | string
   post: string
-  userId: number
+  userId: string
   topicId: number
 }
 
@@ -329,7 +325,7 @@ export type PostUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   topicId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -353,7 +349,6 @@ export type PostCountOrderByAggregateInput = {
 
 export type PostAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
 }
 
@@ -375,7 +370,6 @@ export type PostMinOrderByAggregateInput = {
 
 export type PostSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
 }
 
@@ -424,6 +418,14 @@ export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
   update?: Prisma.PostUpdateWithWhereUniqueWithoutAuthorInput | Prisma.PostUpdateWithWhereUniqueWithoutAuthorInput[]
   updateMany?: Prisma.PostUpdateManyWithWhereWithoutAuthorInput | Prisma.PostUpdateManyWithWhereWithoutAuthorInput[]
   deleteMany?: Prisma.PostScalarWhereInput | Prisma.PostScalarWhereInput[]
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type PostCreateNestedOneWithoutCommentsInput = {
@@ -530,7 +532,7 @@ export type PostScalarWhereInput = {
   id?: Prisma.IntFilter<"Post"> | number
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   post?: Prisma.StringFilter<"Post"> | string
-  userId?: Prisma.IntFilter<"Post"> | number
+  userId?: Prisma.StringFilter<"Post"> | string
   topicId?: Prisma.IntFilter<"Post"> | number
 }
 
@@ -545,7 +547,7 @@ export type PostUncheckedCreateWithoutCommentsInput = {
   id?: number
   createdAt?: Date | string
   post: string
-  userId: number
+  userId: string
   topicId: number
 }
 
@@ -576,7 +578,7 @@ export type PostUncheckedUpdateWithoutCommentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   topicId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -591,7 +593,7 @@ export type PostUncheckedCreateWithoutTopicInput = {
   id?: number
   createdAt?: Date | string
   post: string
-  userId: number
+  userId: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
 }
 
@@ -654,7 +656,7 @@ export type PostCreateManyTopicInput = {
   id?: number
   createdAt?: Date | string
   post: string
-  userId: number
+  userId: string
 }
 
 export type PostUpdateWithoutTopicInput = {
@@ -668,7 +670,7 @@ export type PostUncheckedUpdateWithoutTopicInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
 }
 
@@ -676,7 +678,7 @@ export type PostUncheckedUpdateManyWithoutTopicInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -777,7 +779,7 @@ export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     createdAt: Date
     post: string
-    userId: number
+    userId: string
     topicId: number
   }, ExtArgs["result"]["post"]>
   composites: {}
@@ -1208,7 +1210,7 @@ export interface PostFieldRefs {
   readonly id: Prisma.FieldRef<"Post", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Post", 'DateTime'>
   readonly post: Prisma.FieldRef<"Post", 'String'>
-  readonly userId: Prisma.FieldRef<"Post", 'Int'>
+  readonly userId: Prisma.FieldRef<"Post", 'String'>
   readonly topicId: Prisma.FieldRef<"Post", 'Int'>
 }
     
