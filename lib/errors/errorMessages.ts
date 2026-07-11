@@ -6,6 +6,21 @@ export const ErrorMessages = {
     message: 'Password does not match',
     status: 401,
   },
+  INVALID_CREDENTIALS: {
+    code: 'INVALID_CREDENTIALS',
+    message: 'Identifiant ou mot de passe incorrect',
+    status: 401,
+  },
+  USER_ALREADY_EXISTS: {
+    code: 'USER_ALREADY_EXISTS',
+    message: 'Un compte existe déjà avec cet email',
+    status: 422,
+  },
+  UNKNOWN_AUTH_ERROR: {
+    code: 'UNKNOWN_AUTH_ERROR',
+    message: "Une erreur d'authentification est survenue",
+    status: 500,
+  },
 
   // --- Users ---
   USER_CONFLICT: {
@@ -22,39 +37,5 @@ export const ErrorMessages = {
     code: 'EMAIL_NOT_FOUND',
     message: 'Email not found',
     status: 404,
-  },
-
-  // --- Rentals ---
-  RENTAL_NOT_FOUND: {
-    code: 'RENTAL_NOT_FOUND',
-    message: 'Rental not found',
-    status: 404,
-  },
-  RENTAL_NOT_CREATED: {
-    code: 'RENTAL_NOT_CREATED',
-    message: 'Rental could not be created',
-    status: 500,
-  },
-  RENTAL_NOT_UPDATED: {
-    code: 'RENTAL_NOT_UPDATED',
-    message: 'Rental could not be updated',
-    status: 500,
-  },
-  OWNER_NOT_FOUND: {
-    code: 'OWNER_NOT_FOUND',
-    message: 'Owner not found',
-    status: 404,
-  },
-
-  // --- Messages ---
-  MESSAGE_NOT_FOUND: {
-    code: 'MESSAGE_NOT_FOUND',
-    message: 'Message not found',
-    status: 404,
-  },
-  MESSAGE_NOT_CREATED: {
-    code: 'MESSAGE_NOT_CREATED',
-    message: 'Message could not be created',
-    status: 500,
   },
 } as const;

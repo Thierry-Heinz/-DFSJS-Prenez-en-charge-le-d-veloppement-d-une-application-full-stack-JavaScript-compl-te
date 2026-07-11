@@ -14,7 +14,6 @@ export interface AuthRepository {
   ): Promise<LoginUsernameResult>;
   logout(): Promise<{ success: boolean }>;
   getSession(): Promise<Session>;
-  withApiError(): Promise<void>;
 }
 
 export interface AuthService {

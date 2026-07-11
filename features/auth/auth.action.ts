@@ -1,6 +1,6 @@
 'use server';
 
-import { withActionErrorHandling } from '@/lib/error/error-utils';
+import { withActionErrorHandling } from '@/lib/errors/error-utils';
 import { authService } from './auth.service';
 import { loginSchema } from './dto/login.schema';
 import { redirect } from 'next/navigation';

@@ -8,6 +8,7 @@ import { useActionState } from 'react';
 
 const LoginForm = () => {
   const [state, formAction, isPending] = useActionState(login, undefined);
+  const errors = state && !state.success ? state.fieldErrors : undefined;
 
   return (
     <form action={formAction}>
@@ -16,9 +17,13 @@ const LoginForm = () => {
           E-mail ou nom d'utilisateur
         </FieldLabel>
         <Input id="identifier" />
-        <FieldError>Mauvais E-mail ou nom d'utilisateur.</FieldError>
+        {errors?.identifier && <FieldError>{errors.identifier[0]}</FieldError>}
       </Field>
-      <Input id="password" type="password" />
+      <Field>
+        <FieldLabel htmlFor="password">Mot de passe</FieldLabel>
+        <Input id="password" type="password" />
+        {errors?.password && <FieldError>{errors.password[0]}</FieldError>}
+      </Field>
       <Button type="submit" disabled={isPending}>
         {isPending ? '...' : 'Se connecter'}
       </Button>

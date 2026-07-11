@@ -47,10 +47,10 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model Article
+ * Model Post
  * 
  */
-export type Article = Prisma.ArticleModel
+export type Post = Prisma.PostModel
 /**
  * Model Comment
  * 
@@ -66,3 +66,18 @@ export type Topic = Prisma.TopicModel
  * 
  */
 export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model Verification
+ * 
+ */
+export type Verification = Prisma.VerificationModel

@@ -3,35 +3,40 @@ import 'server-only';
 import { headers } from 'next/headers';
 import { AuthRepository } from '@/types/auth-types';
 import { auth } from '@/lib/auth/auth';
+import { withBetterAuthErrorHandling } from './auth-error-mapper';
 
 export const authRepository: AuthRepository = {
   loginWithEmail: async function (email, password) {
-    const response = await auth.api.signInEmail({
-      body: {
-        email,
-        password,
-      },
-    });
-    return response;
+    return withBetterAuthErrorHandling(() =>
+      auth.api.signInEmail({
+        body: {
+          email,
+          password,
+        },
+      }),
+    );
   },
 
   loginWithUsername: async function (username, password) {
-    const response = await auth.api.signInUsername({
-      body: {
-        username,
-        password,
-      },
-    });
-    return response;
+    return withBetterAuthErrorHandling(() =>
+      auth.api.signInUsername({
+        body: {
+          username,
+          password,
+        },
+      }),
+    );
   },
 
   logout: async function () {
-    return await auth.api.signOut({ headers: await headers() });
+    return withBetterAuthErrorHandling(async () =>
+      auth.api.signOut({ headers: await headers() }),
+    );
   },
 
   getSession: async function () {
-    return await auth.api.getSession({ headers: await headers() });
+    return withBetterAuthErrorHandling(async () =>
+      auth.api.getSession({ headers: await headers() }),
+    );
   },
-
-  withApiError: async function () {},
 };
