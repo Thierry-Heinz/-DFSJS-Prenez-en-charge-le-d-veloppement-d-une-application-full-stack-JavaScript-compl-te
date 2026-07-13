@@ -4,7 +4,13 @@ type Props = {};
 
 const Logo = (props: Props) => {
   return (
-    <Image src="/logo_navbar.png" width={140} height={81} alt="Monde de Dév" />
+    <Image
+      src="/logo_navbar.png"
+      loading="eager"
+      width={140}
+      height={81}
+      alt="Monde de Dév"
+    />
   );
 };
 
