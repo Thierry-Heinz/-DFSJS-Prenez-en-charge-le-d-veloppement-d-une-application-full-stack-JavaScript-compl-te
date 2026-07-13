@@ -188,7 +188,6 @@ describe('auth.action - register', () => {
   });
 
   it('should display error if the email is invalid', async () => {
-    jest.mocked(authService.register).mockRejectedValue({});
     const registerFormData = buildFormData({
       username: 'Test',
       email: 'test@test',
@@ -203,7 +202,6 @@ describe('auth.action - register', () => {
   });
 
   it('should display error if the username is wrong', async () => {
-    jest.mocked(authService.register).mockRejectedValue({});
     const registerFormData = buildFormData({
       username: 'Te',
       email: 'test@test.com',
@@ -237,7 +235,6 @@ describe('auth.action - register', () => {
   });
 
   it('should display error if the password is too short', async () => {
-    jest.mocked(authService.register).mockRejectedValue({});
     const registerFormData = buildFormData({
       username: 'Test',
       email: 'test@test.com',
@@ -252,7 +249,6 @@ describe('auth.action - register', () => {
     });
   });
   it('should display error if the password is has no lowercase character', async () => {
-    jest.mocked(authService.register).mockRejectedValue({});
     const registerFormData = buildFormData({
       username: 'Test',
       email: 'test@test.com',
@@ -267,7 +263,6 @@ describe('auth.action - register', () => {
     });
   });
   it('should display error if the password is has no uppercase character', async () => {
-    jest.mocked(authService.register).mockRejectedValue({});
     const registerFormData = buildFormData({
       username: 'Test',
       email: 'test@test.com',
@@ -282,7 +277,6 @@ describe('auth.action - register', () => {
     });
   });
   it('should display error if the password is has no number', async () => {
-    jest.mocked(authService.register).mockRejectedValue({});
     const registerFormData = buildFormData({
       username: 'Test',
       email: 'test@test.com',
@@ -297,7 +291,6 @@ describe('auth.action - register', () => {
     });
   });
   it('should display error if the password is has no special character', async () => {
-    jest.mocked(authService.register).mockRejectedValue({});
     const registerFormData = buildFormData({
       username: 'Test',
       email: 'test@test.com',
@@ -327,8 +320,7 @@ describe('auth.action - register', () => {
   });
 
   it('should redirect to dashboard if success', async () => {
-    jest.mocked(authService.login).mockResolvedValue({
-      redirect: true,
+    jest.mocked(authService.register).mockResolvedValue({
       token: 'mock-token',
       user: {
         id: 'mock-id',
@@ -341,12 +333,11 @@ describe('auth.action - register', () => {
     });
     const registerFormData = buildFormData({
       username: 'Test',
-
-      identifier: 'test@test.com',
+      email: 'test@test.com',
       password: 'Test!1234',
     });
 
-    await login(undefined, registerFormData);
+    await register(undefined, registerFormData);
     expect(redirect).toHaveBeenCalledWith('/dashboard');
   });
 });
