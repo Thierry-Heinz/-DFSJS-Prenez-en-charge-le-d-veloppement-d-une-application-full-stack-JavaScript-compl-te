@@ -2,7 +2,7 @@ import Logo from '../Logo/Logo';
 
 type Props = {
   children?: React.ReactNode;
-  className: string;
+  className?: string;
 };
 
 export function Navbar({ children, className }: Props): React.ReactNode {
@@ -10,7 +10,6 @@ export function Navbar({ children, className }: Props): React.ReactNode {
     <header
       className={`${className} border-bottom border-1 flex flex-row py-2 justify-between`}
     >
-      <Logo />
       {children}
     </header>
   );

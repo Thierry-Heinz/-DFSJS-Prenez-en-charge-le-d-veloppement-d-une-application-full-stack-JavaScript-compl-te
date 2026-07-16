@@ -1,8 +1,6 @@
 import Image from 'next/image';
 
-type Props = {};
-
-const Logo = (props: Props): React.ReactNode => {
+const Logo = (): React.ReactNode => {
   return (
     <Image
       src="/logo_navbar.png"

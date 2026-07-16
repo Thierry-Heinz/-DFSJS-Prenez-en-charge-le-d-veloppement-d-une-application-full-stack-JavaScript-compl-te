@@ -1,9 +1,9 @@
 import BackButton from '@/components/BackButton/BackButton';
+import Logo from '@/components/Logo/Logo';
 import { Navbar } from '@/components/Navbar/Navbar';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
-
-type Props = {};
 
 const layout = ({
   children,
@@ -12,7 +12,11 @@ const layout = ({
 }>): React.ReactNode => {
   return (
     <main>
-      <Navbar className="hidden lg:block" />
+      <Navbar className="hidden lg:block">
+        <Link href="/">
+          <Logo />
+        </Link>
+      </Navbar>
 
       <div className="py-8 px-12">
         <BackButton url="/" />
