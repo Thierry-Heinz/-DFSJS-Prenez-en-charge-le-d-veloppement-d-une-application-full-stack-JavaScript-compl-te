@@ -1,11 +1,6 @@
 export const ErrorMessages = {
   // --- Auth ---
   UNAUTHORIZED: { code: 'UNAUTHORIZED', message: 'Unauthorized', status: 401 },
-  PASSWORD_NOT_MATCHING: {
-    code: 'PASSWORD_NOT_MATCHING',
-    message: 'Les mots de passe ne coïncident pas',
-    status: 401,
-  },
   INVALID_CREDENTIALS: {
     code: 'INVALID_CREDENTIALS',
     message: 'Identifiant ou mot de passe incorrect',
