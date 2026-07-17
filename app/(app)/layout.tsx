@@ -7,13 +7,12 @@ const layout = ({
   children: React.ReactNode;
 }>): React.ReactNode => {
   return (
-    <main>
+    <>
       <Navbar>
         <AppNav />
       </Navbar>
-
-      {children}
-    </main>
+      <main className="p-8">{children}</main>
+    </>
   );
 };
 export default layout;

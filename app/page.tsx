@@ -1,3 +1,4 @@
+import Button from '@/components/Button/Button';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -19,18 +20,16 @@ export const Home = () => {
         <h1 className="text-3xl font-bold text-foreground">Monde de Dév</h1>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/login"
-            className="inline-flex items-center justify-center px-6 py-3  border-1 border-black text-black rounded-lg hover:text-primary/90 hover:border-primary/90 transition-colors"
-          >
-            Se connecter
-          </Link>
-          <Link
-            href="/register"
-            className="inline-flex items-center justify-center px-6 py-3  border-1 border-black text-black rounded-lg hover:text-primary/90 hover:border-primary/90 transition-colors"
-          >
-            S'inscrire
-          </Link>
+          <Button
+            text="Se connecter"
+            url="/login"
+            className="bg-transparent border-1 border-black text-black hover:text-primary/90 hover:border-primary/90"
+          />
+          <Button
+            text="S'inscrire"
+            url="/register"
+            className="bg-transparent border-1 border-black text-black hover:text-primary/90 hover:border-primary/90"
+          />
         </div>
       </div>
     </div>

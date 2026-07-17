@@ -41,7 +41,7 @@ const AppNav = (): React.ReactNode => {
       <button
         type="button"
         aria-label="Ouvrir le menu"
-        className="lg:hidden"
+        className="lg:hidden p-2 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         <Menu className="size-6" />
