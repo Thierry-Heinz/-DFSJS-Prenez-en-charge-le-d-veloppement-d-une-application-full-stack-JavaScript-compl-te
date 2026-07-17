@@ -1,11 +1,18 @@
 import AppNav from '@/components/Navbar/AppNav';
 import { Navbar } from '@/components/Navbar/Navbar';
+import { authService } from '@/features/auth/auth.service';
+import { redirect } from 'next/navigation';
 
-const layout = ({
+const layout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>): React.ReactNode => {
+}>): Promise<React.ReactNode> => {
+  const session = await authService.getSession();
+  if (!session) {
+    redirect('/');
+  }
+
   return (
     <>
       <Navbar>

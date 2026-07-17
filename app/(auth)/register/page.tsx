@@ -1,12 +1,12 @@
 import RegisterForm from '@/components/Forms/RegisterForm/RegisterForm';
 
-const Login = () => {
+const Register = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center py-8">
       <h1 className="text-2xl">Inscription</h1>
       <RegisterForm />
     </div>
   );
 };
 
-export default Login;
+export default Register;

@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Button = ({
-  className = 'text-white',
+  className = 'text-white hover:bg-primary/90',
   text,
   url,
 }: Props): React.ReactNode => {

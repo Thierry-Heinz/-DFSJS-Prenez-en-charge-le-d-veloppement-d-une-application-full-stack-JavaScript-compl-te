@@ -11,21 +11,21 @@ const RegisterForm = (): React.ReactNode => {
   const errors = state && !state.success ? state.fieldErrors : undefined;
 
   return (
-    <form action={formAction}>
+    <form action={formAction} className="flex flex-col gap-4 py-8">
       {state?.success === false && state.error && (
         <div className="bg-red-100 ">{state.error}</div>
       )}
-      <Field>
+      <Field className="gap-1">
         <FieldLabel htmlFor="username">Nom d'utilisateur</FieldLabel>
         <Input id="username" name="username" />
         {errors?.username && <FieldError>{errors.username[0]}</FieldError>}
       </Field>
-      <Field>
+      <Field className="gap-1">
         <FieldLabel htmlFor="email">E-mail</FieldLabel>
         <Input id="email" name="email" />
         {errors?.email && <FieldError>{errors.email[0]}</FieldError>}
       </Field>
-      <Field>
+      <Field className="gap-1">
         <FieldLabel htmlFor="password">Mot de passe</FieldLabel>
         <Input id="password" type="password" name="password" />
         {errors?.password && <FieldError>{errors.password[0]}</FieldError>}

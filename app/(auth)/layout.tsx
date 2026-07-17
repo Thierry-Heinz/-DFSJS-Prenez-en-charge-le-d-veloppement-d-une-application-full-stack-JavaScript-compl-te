@@ -18,11 +18,11 @@ const layout = ({
         </Link>
       </Navbar>
 
-      <div className="py-8 px-12">
+      <div className="py-4 px-12 absolute">
         <BackButton url="/" />
       </div>
 
-      <div className="flex justify-center visible lg:invisible">
+      <div className="flex justify-center block lg:hidden">
         <Image
           src="/logo_login.png"
           width={412}
