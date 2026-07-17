@@ -27,4 +27,6 @@ export interface AuthRepository {
 export interface AuthService {
   login(input: LoginInput): Promise<LoginEmailResult | LoginUsernameResult>;
   register(input: RegisterInput): Promise<RegisterResult>;
+  getSession(): Promise<Session>;
+  logout(): Promise<{ success: boolean }>;
 }

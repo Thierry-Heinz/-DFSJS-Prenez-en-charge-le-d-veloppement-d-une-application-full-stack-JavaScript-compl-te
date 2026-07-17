@@ -1,6 +1,6 @@
 'use server';
 
-import { withActionErrorHandling } from '@/lib/errors/error-utils';
+import { withActionErrorHandling } from '@/lib/errors/withActionErrorHandling';
 import { authService } from './auth.service';
 import { loginSchema } from './dto/login.schema';
 import { redirect } from 'next/navigation';
@@ -27,4 +27,5 @@ async function registerHandler(prevState: unknown, formData: FormData) {
   await authService.register(parsed.data);
   return redirect('/dashboard');
 }
+
 export const register = withActionErrorHandling(registerHandler);
