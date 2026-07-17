@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton/BackButton';
 import AppNav from '@/components/Navbar/AppNav';
 import { Navbar } from '@/components/Navbar/Navbar';
 import { authService } from '@/features/auth/auth.service';
@@ -18,7 +19,8 @@ const layout = async ({
       <Navbar>
         <AppNav />
       </Navbar>
-      <main className="p-8">{children}</main>
+
+      <main className="px-8">{children}</main>
     </>
   );
 };
