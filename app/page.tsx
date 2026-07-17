@@ -1,7 +1,9 @@
+import { authService } from '@/features/auth/auth.service';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
-export const Home = () => {
+const Home = async () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background">
       <div className="text-center space-y-8">

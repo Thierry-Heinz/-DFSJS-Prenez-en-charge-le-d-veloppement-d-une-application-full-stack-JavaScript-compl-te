@@ -23,4 +23,12 @@ export const authService: AuthService = {
     const { username, email, password } = input;
     return await authRepository.register(username, email, password);
   },
+
+  getSession: async function () {
+    return await authRepository.getSession();
+  },
+
+  logout: async function () {
+    return await authRepository.logout();
+  },
 };
