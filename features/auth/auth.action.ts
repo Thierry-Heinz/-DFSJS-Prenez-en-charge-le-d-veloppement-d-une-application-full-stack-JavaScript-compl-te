@@ -5,7 +5,7 @@ import { authService } from './auth.service';
 import { loginSchema } from './dto/login.schema';
 import { redirect } from 'next/navigation';
 import z from 'zod';
-import { registerSchema } from './dto/registerSchema';
+import { registerSchema } from './dto/register.schema';
 import { ValidationError } from '@/lib/errors/validation-error';
 
 async function loginHandler(prevState: unknown, formData: FormData) {

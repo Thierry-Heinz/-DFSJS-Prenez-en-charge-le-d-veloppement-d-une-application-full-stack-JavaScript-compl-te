@@ -1,5 +1,5 @@
 import { LoginInput } from '@/features/auth/dto/login.schema';
-import { RegisterInput } from '@/features/auth/dto/registerSchema';
+import { RegisterInput } from '@/features/auth/dto/register.schema';
 import { auth } from '@/lib/auth/auth';
 
 export type LoginEmailResult = Awaited<ReturnType<typeof auth.api.signInEmail>>;

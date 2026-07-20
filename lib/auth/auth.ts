@@ -4,9 +4,8 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { username } from 'better-auth/plugins';
 import { nextCookies } from 'better-auth/next-js';
 import { PrismaClient } from '@/src/generated/prisma/client';
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+import { prisma } from '../prisma';
 
-const prisma = new PrismaClient({ adapter });
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: 'postgresql',

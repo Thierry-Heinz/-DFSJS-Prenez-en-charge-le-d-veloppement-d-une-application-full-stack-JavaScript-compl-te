@@ -1,0 +1,39 @@
+import 'server-only';
+
+import { PostService } from '@/types/post-types';
+import { CreatePostInput } from './dto/createPost.schema';
+import { topicService } from '../topic/topic.service';
+import { AppError } from '@/lib/errors/app-error';
+import { ErrorMessages } from '@/lib/errors/errorMessages';
+import { authService } from '../auth/auth.service';
+import { postRepository } from './post.repository';
+
+export const postService: PostService = {
+  getPosts: async function () {
+    return await postRepository.getAllPosts();
+  },
+
+  create: async function (input: CreatePostInput) {
+    const { topicId, title, content } = input;
+    const intTopicId = +topicId;
+    const topicExist = await topicService.getTopicById(intTopicId);
+
+    if (!topicExist) {
+      throw new AppError(ErrorMessages.TOPIC_NOT_FOUND);
+    }
+
+    const userExist = await authService.getSession();
+    if (!userExist) {
+      throw new AppError(ErrorMessages.USER_NOT_FOUND);
+    }
+
+    const post = await postRepository.createPost({
+      userId: userExist.user.id,
+      topicId: intTopicId,
+      title,
+      content,
+    });
+
+    return post;
+  },
+};

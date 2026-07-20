@@ -8,15 +8,19 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { createPost } from '@/features/post/post.action';
+
 import { useActionState } from 'react';
 
-const CreatePostForm = (): React.ReactNode => {
+type CreatePostFormProps = {
+  topics: { name: string; id: number }[];
+};
+
+const CreatePostForm = ({ topics }: CreatePostFormProps): React.ReactNode => {
   const [state, formAction, isPending] = useActionState(createPost, undefined);
   const errors = state && !state.success ? state.fieldErrors : undefined;
 
@@ -26,17 +30,20 @@ const CreatePostForm = (): React.ReactNode => {
         <div className="bg-red-100 ">{state.error}</div>
       )}
       <Field className="gap-1 ">
-        <Select>
-          <SelectTrigger className="w-full border-2 border-primary text-xl h-10">
-            <SelectValue placeholder="Sélectionner un thème" />
+        <Select name="topicId">
+          <SelectTrigger className="w-full border-2 border-primary  h-10">
+            <SelectValue
+              placeholder="Sélectionner un thème"
+              className="text-xl"
+            />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {/*  {items.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
+              {topics.map((topic) => (
+                <SelectItem key={topic.id} value={`${topic.id}`}>
+                  {topic.name}
                 </SelectItem>
-              ))} */}
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>

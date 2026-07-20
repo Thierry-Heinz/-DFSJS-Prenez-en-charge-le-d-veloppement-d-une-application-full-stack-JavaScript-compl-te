@@ -33,4 +33,11 @@ export const ErrorMessages = {
     message: 'Email not found',
     status: 404,
   },
+
+  // --- Topics ---
+  TOPIC_NOT_FOUND: {
+    code: 'TOPIC_NOT_FOUND',
+    message: 'topic not found',
+    status: 404,
+  },
 } as const;

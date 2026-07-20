@@ -3,7 +3,7 @@ import { AuthService } from '@/types/auth-types';
 import { isValidEmail } from '@/lib/utils';
 import { authRepository } from './auth.repository';
 import { LoginInput } from './dto/login.schema';
-import { RegisterInput } from './dto/registerSchema';
+import { RegisterInput } from './dto/register.schema';
 
 export const authService: AuthService = {
   login: async function (input: LoginInput) {
