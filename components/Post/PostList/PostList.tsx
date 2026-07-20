@@ -24,7 +24,7 @@ const PostList = ({ posts }: Props) => {
 
   return (
     <>
-      <header className="pt-[30px] pb-[25px] flex flex-row justify-between">
+      <header className="pt-[30px] pb-[25px] flex flex-col gap-4 items-center lg:flex-row justify-between">
         <NavButton text="Créer un article" url="/post/create" />
         <div className="block">
           <Button

@@ -47,7 +47,7 @@ const CreatePostForm = ({ topics }: CreatePostFormProps): React.ReactNode => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {errors?.topics && <FieldError>{errors.topics[0]}</FieldError>}
+        {errors?.topicId && <FieldError>{errors.topicId[0]}</FieldError>}
       </Field>
       <Field className="gap-1">
         <Input
@@ -63,7 +63,7 @@ const CreatePostForm = ({ topics }: CreatePostFormProps): React.ReactNode => {
           id="content"
           name="content"
           placeholder="Contenu de l'article"
-          className="h-24 border-2 border-primary text-xl"
+          className="h-[212px] border-2 border-primary text-xl"
         />
         {errors?.content && <FieldError>{errors.content[0]}</FieldError>}
       </Field>

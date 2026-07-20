@@ -179,3 +179,43 @@ describe('auth.service - register', () => {
     );
   });
 });
+
+describe('auth.service - getSession', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should return the session from the repository', async () => {
+    const session = {
+      user: { id: 'mock-id', email: 'test@test.com' },
+    } as Awaited<ReturnType<typeof authRepository.getSession>>;
+    jest.mocked(authRepository.getSession).mockResolvedValue(session);
+
+    const response = await authService.getSession();
+
+    expect(response).toEqual(session);
+    expect(authRepository.getSession).toHaveBeenCalledTimes(1);
+  });
+
+  it('should return null when there is no session', async () => {
+    jest.mocked(authRepository.getSession).mockResolvedValue(null);
+
+    const response = await authService.getSession();
+
+    expect(response).toBeNull();
+  });
+});
+
+describe('auth.service - logout', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should delegate to the repository', async () => {
+    jest.mocked(authRepository.logout).mockResolvedValue({ success: true });
+
+    await authService.logout();
+
+    expect(authRepository.logout).toHaveBeenCalledTimes(1);
+  });
+});

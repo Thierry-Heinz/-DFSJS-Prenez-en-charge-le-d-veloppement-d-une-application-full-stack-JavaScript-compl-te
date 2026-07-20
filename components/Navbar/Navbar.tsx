@@ -1,4 +1,4 @@
-import Logo from '../Logo/Logo';
+import { cn } from '@/lib/utils';
 
 type Props = {
   children?: React.ReactNode;
@@ -8,7 +8,10 @@ type Props = {
 export function Navbar({ children, className }: Props): React.ReactNode {
   return (
     <nav
-      className={`${className} border-bottom border-1 flex flex-row py-2 px-8 justify-between`}
+      className={cn(
+        'border-bottom border-1 flex flex-row py-2 px-8 justify-between',
+        className,
+      )}
     >
       {children}
     </nav>

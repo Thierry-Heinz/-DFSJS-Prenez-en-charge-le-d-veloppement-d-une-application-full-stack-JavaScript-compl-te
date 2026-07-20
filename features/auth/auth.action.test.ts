@@ -55,10 +55,7 @@ describe('auth.action - login', () => {
     const response = await login(undefined, loginFormData);
     expect(response).toEqual({
       success: false,
-      error: 'Validation échouée',
-      fieldErrors: {
-        identifier: ['Invalid email format'],
-      },
+      error: 'Identifiant ou mot de passe incorrect',
     });
   });
 

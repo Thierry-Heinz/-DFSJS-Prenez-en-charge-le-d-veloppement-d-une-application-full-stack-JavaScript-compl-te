@@ -12,6 +12,7 @@ const config: Config = {
     'features/**/*.{ts,tsx}',
     '!**/*.d.ts',
     '!**/*.test.{ts,tsx}',
+    '!features/**/*.repository.ts',
     '!app/**/{page,layout,loading,error,not-found,template}.tsx',
     '!app/**/route.ts',
   ],
