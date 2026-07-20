@@ -1,4 +1,4 @@
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/Buttons/BackButton/BackButton';
 import CreatePostForm from '@/components/Forms/CreatePostForm/CreatePostForm';
 import { topicRepository } from '@/features/topic/topic.repository';
 import { topicService } from '@/features/topic/topic.service';

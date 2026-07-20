@@ -1,4 +1,4 @@
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/Buttons/BackButton/BackButton';
 import Logo from '@/components/Logo/Logo';
 import { Navbar } from '@/components/Navbar/Navbar';
 import Image from 'next/image';

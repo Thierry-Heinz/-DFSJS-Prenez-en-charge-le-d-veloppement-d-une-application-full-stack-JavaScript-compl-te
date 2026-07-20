@@ -1,4 +1,4 @@
-import Button from '@/components/Button/Button';
+import Button from '@/components/Buttons/NavButton/NavButton';
 import Image from 'next/image';
 
 const Home = async () => {

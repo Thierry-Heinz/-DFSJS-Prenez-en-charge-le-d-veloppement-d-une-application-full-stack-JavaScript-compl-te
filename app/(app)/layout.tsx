@@ -1,4 +1,4 @@
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/Buttons/BackButton/BackButton';
 import AppNav from '@/components/Navbar/AppNav';
 import { Navbar } from '@/components/Navbar/Navbar';
 import { authService } from '@/features/auth/auth.service';

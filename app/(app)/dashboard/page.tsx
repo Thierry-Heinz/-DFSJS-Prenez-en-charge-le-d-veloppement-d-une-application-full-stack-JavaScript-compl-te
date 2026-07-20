@@ -1,14 +1,12 @@
-import Button from '@/components/Button/Button';
+import Button from '@/components/Buttons/NavButton/NavButton';
+import PostExcerpt from '@/components/Post/PostExcerpt/PostExcerpt';
+import PostList from '@/components/Post/PostList/PostList';
+import { postService } from '@/features/post/post.service';
 
-const Dashboard = (): React.ReactNode => {
-  return (
-    <>
-      <header className="pb-8 flex flex-row justify-space-between">
-        <Button text="Créer un article" url="/post/create" />
-      </header>
-      <section></section>
-    </>
-  );
+const Dashboard = async () => {
+  const posts = await postService.getPosts();
+
+  return <PostList posts={posts} />;
 };
 
 export default Dashboard;

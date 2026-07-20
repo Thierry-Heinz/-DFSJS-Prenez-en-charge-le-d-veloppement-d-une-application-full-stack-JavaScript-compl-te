@@ -1,17 +1,23 @@
 import { CreatePostInput } from '@/features/post/dto/createPost.schema';
-import { string } from 'zod';
+import { User } from '@/src/generated/prisma/client';
 
-type Post = {
+export type Post = {
+  id: number;
+  author: { name: string };
+  userId: string;
   topicId: number;
   title: string;
   content: string;
+  createdAt: Date;
 };
 
-type CreatePost = Post & { userId: string };
+type CreatePost = Omit<Post, 'id' | 'author' | 'createdAt'> & {
+  userId: string;
+};
 
 export interface PostService {
   getPosts(): Promise<Post[]>;
-  create(input: CreatePostInput): Promise<Post | null>;
+  create(input: CreatePostInput): Promise<CreatePost | null>;
 }
 
 export interface PostRepository {
@@ -21,5 +27,5 @@ export interface PostRepository {
     topicId,
     title,
     content,
-  }: CreatePost): Promise<Post | null>;
+  }: CreatePost): Promise<CreatePost | null>;
 }
