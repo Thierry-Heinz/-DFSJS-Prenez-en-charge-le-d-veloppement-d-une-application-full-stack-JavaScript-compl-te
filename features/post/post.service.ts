@@ -9,10 +9,6 @@ import { authService } from '../auth/auth.service';
 import { postRepository } from './post.repository';
 
 export const postService: PostService = {
-  getPosts: async function () {
-    return await postRepository.getAllPosts();
-  },
-
   create: async function (input: CreatePostInput) {
     const { topicId, title, content } = input;
     const intTopicId = +topicId;
@@ -35,5 +31,13 @@ export const postService: PostService = {
     });
 
     return post;
+  },
+
+  getPosts: async function () {
+    return await postRepository.findAllPosts();
+  },
+
+  getPostByIdWithDetails: async function (id) {
+    return await postRepository.findPostByIdWithDetails(id);
   },
 };

@@ -3,7 +3,7 @@ import { User } from '@/src/generated/prisma/client';
 
 export type Post = {
   id: number;
-  author: { name: string };
+
   userId: string;
   topicId: number;
   title: string;
@@ -15,17 +15,21 @@ type CreatePost = Omit<Post, 'id' | 'author' | 'createdAt'> & {
   userId: string;
 };
 
+type PostWithAuthor = Post & { author: { name: string } };
+
 export interface PostService {
-  getPosts(): Promise<Post[]>;
   create(input: CreatePostInput): Promise<CreatePost | null>;
+  getPosts(): Promise<PostWithAuthor[]>;
+  getPostByIdWithDetails(id: number): Promise<Post | null>;
 }
 
 export interface PostRepository {
-  getAllPosts(): Promise<Post[]>;
   createPost({
     userId,
     topicId,
     title,
     content,
   }: CreatePost): Promise<CreatePost | null>;
+  findAllPosts(): Promise<PostWithAuthor[]>;
+  findPostByIdWithDetails(id: number): Promise<Post | null>;
 }
