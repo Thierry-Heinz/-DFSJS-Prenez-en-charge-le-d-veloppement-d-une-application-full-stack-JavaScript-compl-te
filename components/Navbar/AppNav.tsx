@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Articles', href: '/dashboard' },
-  { label: 'Thèmes', href: '/themes' },
+  { label: 'Thèmes', href: '/topics' },
 ];
 
 const AppNav = (): React.ReactNode => {

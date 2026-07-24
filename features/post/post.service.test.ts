@@ -76,7 +76,7 @@ describe('post.service - create', () => {
   it('should throw a user not found error if there is no session', async () => {
     jest
       .mocked(topicService.getTopicById)
-      .mockResolvedValue({ id: 1, name: 'JavaScript' });
+      .mockResolvedValue({ id: 1, name: 'JavaScript', description: null });
     jest.mocked(authService.getSession).mockResolvedValue(null);
 
     const promise = postService.create(input);
@@ -92,7 +92,7 @@ describe('post.service - create', () => {
   it('should trigger a server error', async () => {
     jest
       .mocked(topicService.getTopicById)
-      .mockResolvedValue({ id: 1, name: 'JavaScript' });
+      .mockResolvedValue({ id: 1, name: 'JavaScript', description: null });
     jest.mocked(authService.getSession).mockResolvedValue({
       user: { id: 'user-1' },
     } as Awaited<ReturnType<typeof authService.getSession>>);
@@ -108,7 +108,7 @@ describe('post.service - create', () => {
   it('should create the post with the session user id and the parsed topic id', async () => {
     jest
       .mocked(topicService.getTopicById)
-      .mockResolvedValue({ id: 1, name: 'JavaScript' });
+      .mockResolvedValue({ id: 1, name: 'JavaScript', description: null });
     jest.mocked(authService.getSession).mockResolvedValue({
       user: { id: 'user-1' },
     } as Awaited<ReturnType<typeof authService.getSession>>);

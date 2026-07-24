@@ -1,5 +1,19 @@
 import { prisma } from '@/lib/prisma';
-import { TopicRepository } from '@/types/topic-types';
+import { TopicRepository, TopicWithSubscription } from '@/types/topic-types';
+
+function toDomainTopic(raw: {
+  id: number;
+  name: string;
+  description: string | null;
+  subscriptions: { id: number }[];
+}): TopicWithSubscription {
+  return {
+    id: raw.id,
+    name: raw.name,
+    description: raw.description,
+    isSubscribed: raw.subscriptions.length > 0,
+  };
+}
 
 export const topicRepository: TopicRepository = {
   findAllTopics: async function () {
@@ -16,5 +30,18 @@ export const topicRepository: TopicRepository = {
         id,
       },
     });
+  },
+
+  findAllWithSubscriptionStatus: async function (userId: string) {
+    const topics = await prisma.topic.findMany({
+      include: {
+        subscriptions: {
+          where: {
+            userId,
+          },
+        },
+      },
+    });
+    return topics.map(toDomainTopic);
   },
 };

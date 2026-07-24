@@ -37,16 +37,19 @@ export type TopicSumAggregateOutputType = {
 export type TopicMinAggregateOutputType = {
   id: number | null
   name: string | null
+  description: string | null
 }
 
 export type TopicMaxAggregateOutputType = {
   id: number | null
   name: string | null
+  description: string | null
 }
 
 export type TopicCountAggregateOutputType = {
   id: number
   name: number
+  description: number
   _all: number
 }
 
@@ -62,16 +65,19 @@ export type TopicSumAggregateInputType = {
 export type TopicMinAggregateInputType = {
   id?: true
   name?: true
+  description?: true
 }
 
 export type TopicMaxAggregateInputType = {
   id?: true
   name?: true
+  description?: true
 }
 
 export type TopicCountAggregateInputType = {
   id?: true
   name?: true
+  description?: true
   _all?: true
 }
 
@@ -164,6 +170,7 @@ export type TopicGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type TopicGroupByOutputType = {
   id: number
   name: string
+  description: string | null
   _count: TopicCountAggregateOutputType | null
   _avg: TopicAvgAggregateOutputType | null
   _sum: TopicSumAggregateOutputType | null
@@ -192,6 +199,7 @@ export type TopicWhereInput = {
   NOT?: Prisma.TopicWhereInput | Prisma.TopicWhereInput[]
   id?: Prisma.IntFilter<"Topic"> | number
   name?: Prisma.StringFilter<"Topic"> | string
+  description?: Prisma.StringNullableFilter<"Topic"> | string | null
   subscriptions?: Prisma.SubscriptionListRelationFilter
   posts?: Prisma.PostListRelationFilter
 }
@@ -199,6 +207,7 @@ export type TopicWhereInput = {
 export type TopicOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
 }
@@ -209,6 +218,7 @@ export type TopicWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TopicWhereInput[]
   NOT?: Prisma.TopicWhereInput | Prisma.TopicWhereInput[]
   name?: Prisma.StringFilter<"Topic"> | string
+  description?: Prisma.StringNullableFilter<"Topic"> | string | null
   subscriptions?: Prisma.SubscriptionListRelationFilter
   posts?: Prisma.PostListRelationFilter
 }, "id">
@@ -216,6 +226,7 @@ export type TopicWhereUniqueInput = Prisma.AtLeast<{
 export type TopicOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TopicCountOrderByAggregateInput
   _avg?: Prisma.TopicAvgOrderByAggregateInput
   _max?: Prisma.TopicMaxOrderByAggregateInput
@@ -229,10 +240,12 @@ export type TopicScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TopicScalarWhereWithAggregatesInput | Prisma.TopicScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Topic"> | number
   name?: Prisma.StringWithAggregatesFilter<"Topic"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Topic"> | string | null
 }
 
 export type TopicCreateInput = {
   name: string
+  description?: string | null
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTopicInput
   posts?: Prisma.PostCreateNestedManyWithoutTopicInput
 }
@@ -240,12 +253,14 @@ export type TopicCreateInput = {
 export type TopicUncheckedCreateInput = {
   id?: number
   name: string
+  description?: string | null
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTopicInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutTopicInput
 }
 
 export type TopicUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutTopicNestedInput
   posts?: Prisma.PostUpdateManyWithoutTopicNestedInput
 }
@@ -253,6 +268,7 @@ export type TopicUpdateInput = {
 export type TopicUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTopicNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutTopicNestedInput
 }
@@ -260,15 +276,18 @@ export type TopicUncheckedUpdateInput = {
 export type TopicCreateManyInput = {
   id?: number
   name: string
+  description?: string | null
 }
 
 export type TopicUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TopicUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TopicScalarRelationFilter = {
@@ -279,6 +298,7 @@ export type TopicScalarRelationFilter = {
 export type TopicCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
 }
 
 export type TopicAvgOrderByAggregateInput = {
@@ -288,11 +308,13 @@ export type TopicAvgOrderByAggregateInput = {
 export type TopicMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
 }
 
 export type TopicMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
 }
 
 export type TopicSumOrderByAggregateInput = {
@@ -329,12 +351,14 @@ export type TopicUpdateOneRequiredWithoutSubscriptionsNestedInput = {
 
 export type TopicCreateWithoutPostsInput = {
   name: string
+  description?: string | null
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTopicInput
 }
 
 export type TopicUncheckedCreateWithoutPostsInput = {
   id?: number
   name: string
+  description?: string | null
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTopicInput
 }
 
@@ -356,23 +380,27 @@ export type TopicUpdateToOneWithWhereWithoutPostsInput = {
 
 export type TopicUpdateWithoutPostsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicUncheckedUpdateWithoutPostsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicCreateWithoutSubscriptionsInput = {
   name: string
+  description?: string | null
   posts?: Prisma.PostCreateNestedManyWithoutTopicInput
 }
 
 export type TopicUncheckedCreateWithoutSubscriptionsInput = {
   id?: number
   name: string
+  description?: string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutTopicInput
 }
 
@@ -394,12 +422,14 @@ export type TopicUpdateToOneWithWhereWithoutSubscriptionsInput = {
 
 export type TopicUpdateWithoutSubscriptionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicUncheckedUpdateWithoutSubscriptionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutTopicNestedInput
 }
 
@@ -446,6 +476,7 @@ export type TopicCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Ext
 export type TopicSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
   subscriptions?: boolean | Prisma.Topic$subscriptionsArgs<ExtArgs>
   posts?: boolean | Prisma.Topic$postsArgs<ExtArgs>
   _count?: boolean | Prisma.TopicCountOutputTypeDefaultArgs<ExtArgs>
@@ -454,19 +485,22 @@ export type TopicSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type TopicSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
 }, ExtArgs["result"]["topic"]>
 
 export type TopicSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
 }, ExtArgs["result"]["topic"]>
 
 export type TopicSelectScalar = {
   id?: boolean
   name?: boolean
+  description?: boolean
 }
 
-export type TopicOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["topic"]>
+export type TopicOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["topic"]>
 export type TopicInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscriptions?: boolean | Prisma.Topic$subscriptionsArgs<ExtArgs>
   posts?: boolean | Prisma.Topic$postsArgs<ExtArgs>
@@ -484,6 +518,7 @@ export type $TopicPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
+    description: string | null
   }, ExtArgs["result"]["topic"]>
   composites: {}
 }
@@ -911,6 +946,7 @@ export interface Prisma__TopicClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface TopicFieldRefs {
   readonly id: Prisma.FieldRef<"Topic", 'Int'>
   readonly name: Prisma.FieldRef<"Topic", 'String'>
+  readonly description: Prisma.FieldRef<"Topic", 'String'>
 }
     
 

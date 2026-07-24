@@ -1,0 +1,43 @@
+'use client';
+
+import { useActionState } from 'react';
+import { Button } from '../ui/button';
+import {
+  subscribeAction,
+  unsubscribeAction,
+} from '@/features/subscription/subscription.action';
+
+type Props = {
+  title: string;
+  description: string | null;
+  topicId: number;
+  isSubscribed: boolean;
+};
+
+const Topic = ({ title, description, topicId, isSubscribed }: Props) => {
+  const [state, formAction, isPending] = useActionState(
+    isSubscribed
+      ? unsubscribeAction.bind(null, topicId)
+      : subscribeAction.bind(null, topicId),
+    undefined,
+  );
+  return (
+    <div className="flex flex-col bg-gray-100 rounded rounded-xl gap-2 p-4 w-full">
+      <h2 className="text-base font-semibold">{title}</h2>
+      <span className="text-sm">{description}</span>
+      <div className="w-full flex justify-center">
+        <form action={formAction} className={`w-full flex justify-center`}>
+          <Button
+            type="submit"
+            disabled={isPending}
+            className={`${isSubscribed && 'bg-gray-500'}`}
+          >
+            {isPending ? '...' : isSubscribed ? 'Déjà abonné' : "S'abonner"}
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Topic;

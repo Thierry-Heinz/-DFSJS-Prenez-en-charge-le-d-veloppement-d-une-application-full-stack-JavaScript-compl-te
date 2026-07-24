@@ -16,8 +16,8 @@ describe('topic.service - getTopics', () => {
 
   it('should return the topics from the repository', async () => {
     const topics = [
-      { id: 1, name: 'JavaScript' },
-      { id: 2, name: 'TypeScript' },
+      { id: 1, name: 'JavaScript', description: null },
+      { id: 2, name: 'TypeScript', description: null },
     ];
     jest.mocked(topicRepository.findAllTopics).mockResolvedValue(topics);
 
@@ -34,7 +34,7 @@ describe('topic.service - getTopicById', () => {
   });
 
   it('should return the topic from the repository', async () => {
-    const topic = { id: 1, name: 'JavaScript' };
+    const topic = { id: 1, name: 'JavaScript', description: null };
     jest.mocked(topicRepository.findTopicById).mockResolvedValue(topic);
 
     const response = await topicService.getTopicById(1);

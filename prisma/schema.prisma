@@ -64,6 +64,7 @@ model Subscription {
   subscriber User @relation(fields: [userId], references: [id])
   topicId Int
   topic   Topic @relation(fields: [topicId], references: [id])
+  @@unique([userId, topicId])
   @@map("subscription")
 }
 
