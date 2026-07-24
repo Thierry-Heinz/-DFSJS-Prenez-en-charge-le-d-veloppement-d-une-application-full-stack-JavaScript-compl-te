@@ -34,6 +34,13 @@ export const ErrorMessages = {
     status: 404,
   },
 
+  // --- Posts ---
+  Post_Not_Found: {
+    code: 'POST_NOT_FOUND',
+    message: 'post not found',
+    status: 404,
+  },
+
   // --- Topics ---
   TOPIC_NOT_FOUND: {
     code: 'TOPIC_NOT_FOUND',

@@ -30,9 +30,15 @@ export const postRepository: PostRepository = {
         author: true,
         topic: true,
         comments: {
-          include: { author: true }, // si tu affiches l'auteur de chaque comment
+          include: { author: true },
         },
       },
+    });
+  },
+
+  findPostById: async function (id) {
+    return await prisma.post.findUnique({
+      where: { id },
     });
   },
 };

@@ -40,4 +40,8 @@ export const postService: PostService = {
   getPostByIdWithDetails: async function (id) {
     return await postRepository.findPostByIdWithDetails(id);
   },
+
+  getPostById: async function (id) {
+    return await postRepository.findPostById(id);
+  },
 };

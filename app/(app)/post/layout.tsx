@@ -9,7 +9,7 @@ const layout = ({
 }>) => {
   return (
     <>
-      <div className="absolute px-8 py-4">
+      <div className="absolute px-8 py-8">
         <BackButton url="/dashboard" />
       </div>
       {children}
