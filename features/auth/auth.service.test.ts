@@ -9,6 +9,7 @@ jest.mock('./auth.repository', () => ({
     logout: jest.fn(),
     register: jest.fn(),
     getSession: jest.fn(),
+    setPassword: jest.fn(),
   },
 }));
 
@@ -203,6 +204,39 @@ describe('auth.service - getSession', () => {
     const response = await authService.getSession();
 
     expect(response).toBeNull();
+  });
+});
+
+describe('auth.service - setPassword', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should throw a user not found error if there is no session', async () => {
+    jest.mocked(authRepository.getSession).mockResolvedValue(null);
+
+    const promise = authService.setPassword('NewPassword1!');
+
+    await expect(promise).rejects.toBeInstanceOf(AppError);
+    await expect(promise).rejects.toMatchObject({
+      code: ErrorMessages.USER_NOT_FOUND.code,
+      status: ErrorMessages.USER_NOT_FOUND.status,
+    });
+    expect(authRepository.setPassword).not.toHaveBeenCalled();
+  });
+
+  it('should delegate to the repository with the session user id', async () => {
+    jest.mocked(authRepository.getSession).mockResolvedValue({
+      user: { id: 'user-1' },
+    } as Awaited<ReturnType<typeof authRepository.getSession>>);
+    jest.mocked(authRepository.setPassword).mockResolvedValue(undefined);
+
+    await authService.setPassword('NewPassword1!');
+
+    expect(authRepository.setPassword).toHaveBeenCalledWith(
+      'user-1',
+      'NewPassword1!',
+    );
   });
 });
 

@@ -1,6 +1,8 @@
 import 'server-only';
 import { AuthService } from '@/types/auth-types';
 import { isValidEmail } from '@/lib/utils';
+import { AppError } from '@/lib/errors/app-error';
+import { ErrorMessages } from '@/lib/errors/errorMessages';
 import { authRepository } from './auth.repository';
 import { LoginInput } from './dto/login.schema';
 import { RegisterInput } from './dto/register.schema';
@@ -30,5 +32,21 @@ export const authService: AuthService = {
 
   logout: async function () {
     return await authRepository.logout();
+  },
+
+  setPassword: async function (newPassword: string) {
+    const session = await authRepository.getSession();
+    if (!session) {
+      throw new AppError(ErrorMessages.USER_NOT_FOUND);
+    }
+    await authRepository.setPassword(session.user.id, newPassword);
+  },
+
+  updateUser: async function (username: string) {
+    return await authRepository.updateUser(username);
+  },
+
+  changeEmail: async function (newEmail: string) {
+    return await authRepository.changeEmail(newEmail);
   },
 };

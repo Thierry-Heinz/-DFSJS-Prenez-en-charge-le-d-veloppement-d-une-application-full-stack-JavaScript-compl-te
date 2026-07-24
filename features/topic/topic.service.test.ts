@@ -1,13 +1,23 @@
 import { topicService } from './topic.service';
+import { AppError } from '@/lib/errors/app-error';
+import { ErrorMessages } from '@/lib/errors/errorMessages';
 
 jest.mock('./topic.repository', () => ({
   topicRepository: {
     findAllTopics: jest.fn(),
     findTopicById: jest.fn(),
+    findAllWithSubscriptionStatus: jest.fn(),
+  },
+}));
+
+jest.mock('../auth/auth.service', () => ({
+  authService: {
+    getSession: jest.fn(),
   },
 }));
 
 import { topicRepository } from './topic.repository';
+import { authService } from '../auth/auth.service';
 
 describe('topic.service - getTopics', () => {
   afterEach(() => {
@@ -49,5 +59,43 @@ describe('topic.service - getTopicById', () => {
     const response = await topicService.getTopicById(999);
 
     expect(response).toBeNull();
+  });
+});
+
+describe('topic.service - getAllUserTopics', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should throw a user not found error if there is no session', async () => {
+    jest.mocked(authService.getSession).mockResolvedValue(null);
+
+    const promise = topicService.getAllUserTopics();
+
+    await expect(promise).rejects.toBeInstanceOf(AppError);
+    await expect(promise).rejects.toMatchObject({
+      code: ErrorMessages.USER_NOT_FOUND.code,
+      status: ErrorMessages.USER_NOT_FOUND.status,
+    });
+    expect(topicRepository.findAllWithSubscriptionStatus).not.toHaveBeenCalled();
+  });
+
+  it('should return the topics with subscription status for the current user', async () => {
+    jest.mocked(authService.getSession).mockResolvedValue({
+      user: { id: 'user-1' },
+    } as Awaited<ReturnType<typeof authService.getSession>>);
+    const topics = [
+      { id: 1, name: 'JavaScript', description: null, isSubscribed: true },
+    ];
+    jest
+      .mocked(topicRepository.findAllWithSubscriptionStatus)
+      .mockResolvedValue(topics);
+
+    const response = await topicService.getAllUserTopics();
+
+    expect(response).toEqual(topics);
+    expect(topicRepository.findAllWithSubscriptionStatus).toHaveBeenCalledWith(
+      'user-1',
+    );
   });
 });

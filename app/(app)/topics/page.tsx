@@ -4,8 +4,6 @@ import { topicService } from '@/features/topic/topic.service';
 const Topics = async () => {
   const topics = await topicService.getAllUserTopics();
 
-  console.log(topics);
-
   if (!topics) return;
   return (
     <main className="py-8 flex flex-col items-center">

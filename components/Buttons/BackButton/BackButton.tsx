@@ -11,8 +11,8 @@ const BackButton = ({ url }: Props): React.ReactNode => {
     <Link href={url}>
       <Image
         src="/arrow_back.png"
-        width={30}
-        height={3}
+        width={41}
+        height={23}
         alt="Flèche de retour"
       />
     </Link>

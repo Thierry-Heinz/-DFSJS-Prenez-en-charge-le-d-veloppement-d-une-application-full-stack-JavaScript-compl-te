@@ -11,5 +11,14 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  user: {
+    changeEmail: {
+      enabled: true,
+      // No email-sending integration exists in this app yet, so there is no
+      // way to deliver a confirmation link. Applying the change immediately
+      // is the only usable option until a verification flow is added.
+      updateEmailWithoutVerification: true,
+    },
+  },
   plugins: [username(), nextCookies()],
 });

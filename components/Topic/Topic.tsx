@@ -30,7 +30,7 @@ const Topic = ({ title, description, topicId, isSubscribed }: Props) => {
           <Button
             type="submit"
             disabled={isPending}
-            className={`${isSubscribed && 'bg-gray-500'}`}
+            className={`${isSubscribed && 'bg-gray-500'} cursor-pointer`}
           >
             {isPending ? '...' : isSubscribed ? 'Déjà abonné' : "S'abonner"}
           </Button>
