@@ -8,8 +8,6 @@ export type LoginUsernameResult = Awaited<
 >;
 export type RegisterResult = Awaited<ReturnType<typeof auth.api.signUpEmail>>;
 export type Session = Awaited<ReturnType<typeof auth.api.getSession>>;
-export type UpdateUserResult = Awaited<ReturnType<typeof auth.api.updateUser>>;
-export type ChangeEmailResult = Awaited<ReturnType<typeof auth.api.changeEmail>>;
 
 export interface AuthRepository {
   loginWithEmail(email: string, password: string): Promise<LoginEmailResult>;
@@ -24,9 +22,6 @@ export interface AuthRepository {
     password: string,
   ): Promise<RegisterResult>;
   getSession(): Promise<Session>;
-  setPassword(userId: string, newPassword: string): Promise<void>;
-  updateUser(username: string): Promise<UpdateUserResult>;
-  changeEmail(newEmail: string): Promise<ChangeEmailResult>;
 }
 
 export interface AuthService {
@@ -34,7 +29,4 @@ export interface AuthService {
   register(input: RegisterInput): Promise<RegisterResult>;
   getSession(): Promise<Session>;
   logout(): Promise<{ success: boolean }>;
-  setPassword(newPassword: string): Promise<void>;
-  updateUser(username: string): Promise<UpdateUserResult>;
-  changeEmail(newEmail: string): Promise<ChangeEmailResult>;
 }

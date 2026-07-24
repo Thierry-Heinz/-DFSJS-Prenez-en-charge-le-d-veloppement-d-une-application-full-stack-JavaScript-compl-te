@@ -13,6 +13,7 @@ const config: Config = {
     '!**/*.d.ts',
     '!**/*.test.{ts,tsx}',
     '!features/**/*.repository.ts',
+    '!features/**/*.schema.ts',
     '!app/**/{page,layout,loading,error,not-found,template}.tsx',
     '!app/**/route.ts',
   ],

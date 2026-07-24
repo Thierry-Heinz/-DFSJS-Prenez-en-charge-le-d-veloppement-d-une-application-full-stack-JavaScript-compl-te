@@ -6,6 +6,8 @@ jest.mock('./post.repository', () => ({
   postRepository: {
     findAllPosts: jest.fn(),
     createPost: jest.fn(),
+    findPostByIdWithDetails: jest.fn(),
+    findPostById: jest.fn(),
   },
 }));
 
@@ -130,5 +132,72 @@ describe('post.service - create', () => {
       title: 'Titre',
       content: 'Contenu',
     });
+  });
+});
+
+describe('post.service - getPostByIdWithDetails', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should return the post with details from the repository', async () => {
+    const post = {
+      id: 1,
+      userId: 'user-1',
+      topicId: 1,
+      title: 'Titre',
+      content: 'Contenu',
+      createdAt: new Date('2026-07-16'),
+      author: { name: 'Auteur' },
+      topic: { id: 1, name: 'JavaScript' },
+      comments: [],
+    };
+    jest
+      .mocked(postRepository.findPostByIdWithDetails)
+      .mockResolvedValue(post);
+
+    const response = await postService.getPostByIdWithDetails(1);
+
+    expect(response).toEqual(post);
+    expect(postRepository.findPostByIdWithDetails).toHaveBeenCalledWith(1);
+  });
+
+  it('should return null when the post does not exist', async () => {
+    jest.mocked(postRepository.findPostByIdWithDetails).mockResolvedValue(null);
+
+    const response = await postService.getPostByIdWithDetails(999);
+
+    expect(response).toBeNull();
+  });
+});
+
+describe('post.service - getPostById', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should return the post from the repository', async () => {
+    const post = {
+      id: 1,
+      userId: 'user-1',
+      topicId: 1,
+      title: 'Titre',
+      content: 'Contenu',
+      createdAt: new Date('2026-07-16'),
+    };
+    jest.mocked(postRepository.findPostById).mockResolvedValue(post);
+
+    const response = await postService.getPostById(1);
+
+    expect(response).toEqual(post);
+    expect(postRepository.findPostById).toHaveBeenCalledWith(1);
+  });
+
+  it('should return null when the post does not exist', async () => {
+    jest.mocked(postRepository.findPostById).mockResolvedValue(null);
+
+    const response = await postService.getPostById(999);
+
+    expect(response).toBeNull();
   });
 });

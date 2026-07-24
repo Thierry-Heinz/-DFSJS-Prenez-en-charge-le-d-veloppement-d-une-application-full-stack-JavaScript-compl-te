@@ -1,4 +1,4 @@
-import Topic from '@/components/Topic/Topic';
+import Topic from '@/components/TopicCard/TopicCard';
 import { topicService } from '@/features/topic/topic.service';
 
 const Topics = async () => {

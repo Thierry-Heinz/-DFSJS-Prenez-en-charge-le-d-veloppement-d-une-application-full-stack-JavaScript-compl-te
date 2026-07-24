@@ -7,12 +7,12 @@ type Props = {
 
 const CommentList = ({ comments }: Props): React.ReactNode => {
   return (
-    <div className="flex flex-col gap-8">
-      {comments.map((comment, i) => {
+    <div className="flex flex-col gap-2 md:gap-8 px-4 md:pl-8 md:pr-30">
+      {comments.map((comment) => {
         return (
           <div
             key={comment.id}
-            className={`${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} flex px-8 gap-6 items-start w-full`}
+            className={`flex-col md:flex-row flex md:gap-6 md:items-start items-end w-full`}
           >
             <span>{comment.author.name}</span>
             <span className="p-4 rounded rounded-xl bg-gray-100 w-full flex-inline">

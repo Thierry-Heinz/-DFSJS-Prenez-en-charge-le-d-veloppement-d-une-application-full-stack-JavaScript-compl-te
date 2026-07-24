@@ -12,7 +12,7 @@ type Props = {
 };
 
 const PostList = ({ posts }: Props) => {
-  const [sort, setSort] = useState('asc');
+  const [sort, setSort] = useState('desc');
 
   const sortedPosts = [...posts].sort(function (a, b) {
     const timeA = a.createdAt.getTime();

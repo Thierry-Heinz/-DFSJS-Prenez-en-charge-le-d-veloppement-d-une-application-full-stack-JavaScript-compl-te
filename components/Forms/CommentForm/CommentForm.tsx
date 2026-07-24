@@ -17,7 +17,7 @@ const CommentForm = (): React.ReactNode => {
 
   const errors = state && !state.success ? state.fieldErrors : undefined;
   return (
-    <form action={formAction} className="flex flex-row gap-2 p-8">
+    <form action={formAction} className="flex flex-row gap-2 md:p-8">
       {state?.success === false && state.error && (
         <div className="bg-red-100 ">{state.error}</div>
       )}

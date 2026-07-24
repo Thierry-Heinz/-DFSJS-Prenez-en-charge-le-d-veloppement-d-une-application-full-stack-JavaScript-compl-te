@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { User, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 export type NavItem = { label: string; href: string };
 
@@ -20,20 +21,16 @@ const MobileMenu = ({
   onLogout,
   navItems,
 }: Props): React.ReactNode => {
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(isOpen);
   const [entered, setEntered] = useState(isOpen);
   const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
 
-  // Adjust state during render instead of in an effect (see
-  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes):
-  // re-mount as soon as isOpen flips to true, without an extra render pass.
   if (isOpen !== prevIsOpen) {
     setPrevIsOpen(isOpen);
     if (isOpen) setMounted(true);
   }
 
-  // Mount first in the closed position, then flip to open on the next frame so the
-  // transition actually plays instead of the panel snapping straight to open.
   useEffect(() => {
     if (!mounted || !isOpen || entered) return;
     const frame = requestAnimationFrame(() => setEntered(true));
@@ -57,9 +54,6 @@ const MobileMenu = ({
 
   if (!mounted) return null;
 
-  // Driven by isOpen (not just `entered`) so closing - even mid slide-in - immediately
-  // targets the closed position; the CSS transition interpolates from wherever the
-  // panel currently is instead of snapping to the resting state first.
   const open = isOpen && entered;
 
   const handleTransitionEnd = () => {
@@ -88,17 +82,16 @@ const MobileMenu = ({
         data-testid="mobile-menu-panel"
         onTransitionEnd={handleTransitionEnd}
         className={cn(
-          'absolute inset-y-0 right-0 flex w-3/4 max-w-xs flex-col gap-6 bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out',
+          'absolute inset-y-0 right-0 flex w-3/4 max-w-xs flex-col gap-4 bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out items-end',
           open ? 'translate-x-0' : 'translate-x-full',
         )}
       >
         <button
           type="button"
-          aria-label="Fermer le menu"
-          onClick={onClose}
-          className="self-end"
+          onClick={onLogout}
+          className="font-bold text-red-800 text-base cursor-pointer"
         >
-          <X className="size-6" />
+          Se déconnecter
         </button>
 
         <nav className="flex flex-col gap-4">
@@ -107,27 +100,20 @@ const MobileMenu = ({
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className="text-xl"
+              className={`text-xl ${pathname === item.href && 'text-primary'}`}
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="mt-auto flex items-center justify-between border-t pt-4">
+        <div className="mt-auto flex items-center justify-between pt-4">
           <Link href="/profile" aria-label="Profil">
             <User
-              className="size-8 rounded-full border p-1"
+              className="size-12 rounded-full p-1 bg-gray-300"
               aria-hidden="true"
             />
           </Link>
-          <button
-            type="button"
-            onClick={onLogout}
-            className="font-bold text-destructive"
-          >
-            Se déconnecter
-          </button>
         </div>
       </div>
     </div>

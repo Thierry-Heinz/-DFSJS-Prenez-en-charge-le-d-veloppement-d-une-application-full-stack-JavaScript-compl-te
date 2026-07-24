@@ -12,18 +12,18 @@ export const Post = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!post) return;
 
   return (
-    <main className="py-6 px-24 flex flex-col">
+    <main className="md:py-6 md:px-24 p-4 flex flex-col">
       <article className="mb-8">
         <h1 className="font-semibold text-2xl mb-4">{post?.title}</h1>
         <span className="flex gap-8 mb-4 ">
           <time>{formattedDate}</time>
           <span>{post?.author.name}</span>
-          <span>{post?.topic.name}</span>
+          <span className="capitalize">{post?.topic.name}</span>
         </span>
         <p className="pb-8 border-b border-black">{post?.content}</p>
       </article>
       <aside>
-        <h2 className="text-xl mb-8">Commentaires</h2>
+        <h2 className="text-xl mb-2 md:mb-8">Commentaires</h2>
         {post?.comments.length !== 0 ? (
           <CommentList comments={post.comments} />
         ) : (

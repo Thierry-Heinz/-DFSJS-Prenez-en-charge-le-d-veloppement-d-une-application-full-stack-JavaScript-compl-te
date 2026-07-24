@@ -31,7 +31,7 @@ describe('CommentList', () => {
     screen.getByText('Deuxième commentaire');
   });
 
-  it('should alternate the row direction between even and odd comments', () => {
+  it('should render every comment row with the same layout classes', () => {
     const comments = [
       buildComment({ id: 1 }),
       buildComment({ id: 2 }),
@@ -41,8 +41,8 @@ describe('CommentList', () => {
     const { container } = render(<CommentList comments={comments} />);
     const rows = container.querySelectorAll(':scope > div > div');
 
-    expect(rows[0]).toHaveClass('flex-row');
-    expect(rows[1]).toHaveClass('flex-row-reverse');
-    expect(rows[2]).toHaveClass('flex-row');
+    expect(rows).toHaveLength(3);
+    expect(rows[1].className).toBe(rows[0].className);
+    expect(rows[2].className).toBe(rows[0].className);
   });
 });

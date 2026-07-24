@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Field, FieldError } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { saveProfile } from '@/features/auth/profile.action';
+import { saveProfile } from '@/features/profile/profile.action';
 import { User } from '@/types/user-types';
 import { useActionState, useEffect, useRef } from 'react';
 
@@ -26,7 +26,7 @@ const ProfileForm = ({ username, email }: User): React.ReactNode => {
   return (
     <form
       action={formAction}
-      className="flex flex-col gap-4 py-8 w-full max-w-md"
+      className="flex flex-col gap-4 py-8 w-full md:max-w-md"
     >
       {state?.success === false && state.error && (
         <div className="bg-red-100">{state.error}</div>

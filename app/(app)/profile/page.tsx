@@ -1,5 +1,5 @@
 import ProfileForm from '@/components/Forms/ProfileForm/ProfileForm';
-import Topic from '@/components/Topic/Topic';
+import Topic from '@/components/TopicCard/TopicCard';
 import { authService } from '@/features/auth/auth.service';
 import { topicService } from '@/features/topic/topic.service';
 import React from 'react';
@@ -13,7 +13,7 @@ const Profile = async (): Promise<React.ReactNode> => {
   if (!session) return;
 
   return (
-    <div className="py-8 flex flex-col items-center">
+    <div className="py-8 flex flex-col items-center w-full">
       <main className="flex flex-col justify-center items-center py-8 ">
         <h1 className="text-2xl font-semibold">Profil utilisateur</h1>
         <ProfileForm
@@ -22,7 +22,7 @@ const Profile = async (): Promise<React.ReactNode> => {
         />
       </main>
 
-      <aside className="border-t border-black pt-4 flex flex-col items-center w-full">
+      <aside className="border-t border-black pt-4 flex flex-col items-center">
         <h2 className="font-semibold text-xl mb-2">Abonnements</h2>
         <section className="grid lg:grid-cols-2 gap-x-[45px] gap-y-[21px] w-full ">
           {topics.map((topic) => {

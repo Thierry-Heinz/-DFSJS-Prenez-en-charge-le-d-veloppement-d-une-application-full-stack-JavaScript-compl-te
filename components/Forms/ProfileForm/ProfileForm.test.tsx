@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import ProfileForm from './ProfileForm';
 
-jest.mock('../../../features/auth/profile.action', () => ({
+jest.mock('../../../features/profile/profile.action', () => ({
   saveProfile: jest.fn(),
 }));
 
-import { saveProfile } from '../../../features/auth/profile.action';
+import { saveProfile } from '../../../features/profile/profile.action';
 
 function getInput(container: HTMLElement, name: string) {
   return container.querySelector(`input[name="${name}"]`) as HTMLInputElement;
@@ -60,7 +60,9 @@ describe('ProfileForm', () => {
   });
 
   it('should submit the form fields and pass the current email to saveProfile', async () => {
-    jest.mocked(saveProfile).mockResolvedValue({ success: true, data: undefined });
+    jest
+      .mocked(saveProfile)
+      .mockResolvedValue({ success: true, data: undefined });
 
     fireEvent.change(getInput(container, 'username'), {
       target: { value: 'newusername' },
@@ -80,7 +82,9 @@ describe('ProfileForm', () => {
   });
 
   it('should clear the password field on success', async () => {
-    jest.mocked(saveProfile).mockResolvedValue({ success: true, data: undefined });
+    jest
+      .mocked(saveProfile)
+      .mockResolvedValue({ success: true, data: undefined });
 
     fireEvent.change(getInput(container, 'newPassword'), {
       target: { value: 'NewPassword1!' },

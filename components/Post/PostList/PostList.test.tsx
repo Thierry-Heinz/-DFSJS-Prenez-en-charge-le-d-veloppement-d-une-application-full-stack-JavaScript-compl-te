@@ -38,9 +38,9 @@ describe('PostList', () => {
     ).toHaveAttribute('href', '/post/create');
   });
 
-  it('should sort posts ascending by date by default', () => {
+  it('should sort posts descending by date by default', () => {
     render(<PostList posts={posts} />);
-    expect(getRenderedTitles()).toEqual(['Premier', 'Troisième', 'Deuxième']);
+    expect(getRenderedTitles()).toEqual(['Deuxième', 'Troisième', 'Premier']);
   });
 
   it('should reverse the sort order when the sort button is clicked', () => {
@@ -48,15 +48,15 @@ describe('PostList', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /Trier par/ }));
 
-    expect(getRenderedTitles()).toEqual(['Deuxième', 'Troisième', 'Premier']);
+    expect(getRenderedTitles()).toEqual(['Premier', 'Troisième', 'Deuxième']);
   });
 
-  it('should sort ascending again when the sort button is clicked twice', () => {
+  it('should sort descending again when the sort button is clicked twice', () => {
     render(<PostList posts={posts} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Trier par/ }));
     fireEvent.click(screen.getByRole('button', { name: /Trier par/ }));
 
-    expect(getRenderedTitles()).toEqual(['Premier', 'Troisième', 'Deuxième']);
+    expect(getRenderedTitles()).toEqual(['Deuxième', 'Troisième', 'Premier']);
   });
 });

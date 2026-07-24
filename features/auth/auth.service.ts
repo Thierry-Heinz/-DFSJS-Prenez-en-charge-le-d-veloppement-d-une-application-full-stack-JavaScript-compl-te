@@ -33,20 +33,4 @@ export const authService: AuthService = {
   logout: async function () {
     return await authRepository.logout();
   },
-
-  setPassword: async function (newPassword: string) {
-    const session = await authRepository.getSession();
-    if (!session) {
-      throw new AppError(ErrorMessages.USER_NOT_FOUND);
-    }
-    await authRepository.setPassword(session.user.id, newPassword);
-  },
-
-  updateUser: async function (username: string) {
-    return await authRepository.updateUser(username);
-  },
-
-  changeEmail: async function (newEmail: string) {
-    return await authRepository.changeEmail(newEmail);
-  },
 };
