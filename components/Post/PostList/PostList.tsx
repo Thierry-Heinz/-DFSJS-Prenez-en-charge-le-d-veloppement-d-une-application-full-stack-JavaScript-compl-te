@@ -1,14 +1,14 @@
 'use client';
 
 import NavButton from '@/components/Buttons/NavButton/NavButton';
-import { Post } from '@/types/post-types';
+import { PostWithAuthor } from '@/types/post-types';
 import PostExcerpt from '../PostExcerpt/PostExcerpt';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { useState } from 'react';
 
 type Props = {
-  posts: Post[];
+  posts: PostWithAuthor[];
 };
 
 const PostList = ({ posts }: Props) => {

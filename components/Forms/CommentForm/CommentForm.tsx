@@ -8,10 +8,6 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import React, { useActionState } from 'react';
 
-type Props = {
-  postId: number;
-};
-
 const CommentForm = (): React.ReactNode => {
   const params = useParams<{ id: string }>();
   const [state, formAction, isPending] = useActionState(

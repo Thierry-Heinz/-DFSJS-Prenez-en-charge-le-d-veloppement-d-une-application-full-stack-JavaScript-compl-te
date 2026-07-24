@@ -16,7 +16,7 @@ const RegisterForm = (): React.ReactNode => {
         <div className="bg-red-100 ">{state.error}</div>
       )}
       <Field className="gap-1">
-        <FieldLabel htmlFor="username">Nom d'utilisateur</FieldLabel>
+        <FieldLabel htmlFor="username">Nom d&apos;utilisateur</FieldLabel>
         <Input id="username" name="username" />
         {errors?.username && <FieldError>{errors.username[0]}</FieldError>}
       </Field>

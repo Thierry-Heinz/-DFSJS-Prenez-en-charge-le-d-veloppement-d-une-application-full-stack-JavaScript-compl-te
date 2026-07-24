@@ -4,7 +4,7 @@ import { ErrorMessages } from '@/lib/errors/errorMessages';
 
 jest.mock('./post.repository', () => ({
   postRepository: {
-    getAllPosts: jest.fn(),
+    findAllPosts: jest.fn(),
     createPost: jest.fn(),
   },
 }));
@@ -42,12 +42,12 @@ describe('post.service - getPosts', () => {
         createdAt: new Date('2026-07-16'),
       },
     ];
-    jest.mocked(postRepository.getAllPosts).mockResolvedValue(posts);
+    jest.mocked(postRepository.findAllPosts).mockResolvedValue(posts);
 
     const response = await postService.getPosts();
 
     expect(response).toEqual(posts);
-    expect(postRepository.getAllPosts).toHaveBeenCalledTimes(1);
+    expect(postRepository.findAllPosts).toHaveBeenCalledTimes(1);
   });
 });
 

@@ -27,7 +27,7 @@ export const Post = async ({ params }: { params: Promise<{ id: string }> }) => {
         {post?.comments.length !== 0 ? (
           <CommentList comments={post.comments} />
         ) : (
-          <span>'Pas de commentaires'</span>
+          <span>Pas de commentaires</span>
         )}
         <footer className="py-8">
           <CommentForm />

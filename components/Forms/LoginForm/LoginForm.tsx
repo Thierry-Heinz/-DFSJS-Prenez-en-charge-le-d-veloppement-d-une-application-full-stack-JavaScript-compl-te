@@ -17,7 +17,7 @@ const LoginForm = (): React.ReactNode => {
       )}
       <Field className="gap-1">
         <FieldLabel htmlFor="identifier">
-          E-mail ou nom d'utilisateur
+          E-mail ou nom d&apos;utilisateur
         </FieldLabel>
         <Input id="identifier" name="identifier" />
         {errors?.identifier && <FieldError>{errors.identifier[0]}</FieldError>}

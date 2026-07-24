@@ -17,13 +17,14 @@ async function createCommentHandler(
     ...Object.fromEntries(formData),
     postId,
   });
-  console.log(parsed);
   if (!parsed.success) {
     throw new ValidationError(z.flattenError(parsed.error).fieldErrors);
   }
-  await commentService.create(parsed.data);
+  const comment = await commentService.create(parsed.data);
 
   revalidatePath(`/post/${postId}`);
+
+  return comment;
 }
 
 export const createComment = withAuth(

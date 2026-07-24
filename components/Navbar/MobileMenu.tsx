@@ -22,10 +22,15 @@ const MobileMenu = ({
 }: Props): React.ReactNode => {
   const [mounted, setMounted] = useState(isOpen);
   const [entered, setEntered] = useState(isOpen);
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
 
-  useEffect(() => {
+  // Adjust state during render instead of in an effect (see
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes):
+  // re-mount as soon as isOpen flips to true, without an extra render pass.
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
     if (isOpen) setMounted(true);
-  }, [isOpen]);
+  }
 
   // Mount first in the closed position, then flip to open on the next frame so the
   // transition actually plays instead of the panel snapping straight to open.

@@ -1,5 +1,4 @@
 import { prisma } from '@/lib/prisma';
-import { PrismaClient } from '@/src/generated/prisma/client';
 import { TopicRepository } from '@/types/topic-types';
 
 export const topicRepository: TopicRepository = {

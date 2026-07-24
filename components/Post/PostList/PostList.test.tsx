@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import PostList from './PostList';
-import { Post } from '@/types/post-types';
+import { PostWithAuthor } from '@/types/post-types';
 
-function buildPost(overrides: Partial<Post>): Post {
+function buildPost(overrides: Partial<PostWithAuthor>): PostWithAuthor {
   return {
     id: 1,
     author: { name: 'Auteur' },
@@ -15,7 +15,7 @@ function buildPost(overrides: Partial<Post>): Post {
   };
 }
 
-const posts: Post[] = [
+const posts: PostWithAuthor[] = [
   buildPost({ id: 1, title: 'Premier', createdAt: new Date('2026-01-01') }),
   buildPost({ id: 2, title: 'Deuxième', createdAt: new Date('2026-03-01') }),
   buildPost({ id: 3, title: 'Troisième', createdAt: new Date('2026-02-01') }),

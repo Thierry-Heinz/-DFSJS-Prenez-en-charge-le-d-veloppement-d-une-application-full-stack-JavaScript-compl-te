@@ -1,5 +1,5 @@
 import { CreatePostInput } from '@/features/post/dto/createPost.schema';
-import { Comment, CommentWithAuthor } from './comment-types';
+import { CommentWithAuthor } from './comment-types';
 
 export type Post = {
   id: number;
@@ -15,7 +15,7 @@ type CreatePost = Omit<Post, 'id' | 'author' | 'createdAt'> & {
   userId: string;
 };
 
-type PostWithAuthor = Post & { author: { name: string } };
+export type PostWithAuthor = Post & { author: { name: string } };
 type PostWithDetails = Post & {
   author: { name: string };
   topic: {

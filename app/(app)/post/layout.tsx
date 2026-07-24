@@ -1,7 +1,5 @@
 import BackButton from '@/components/Buttons/BackButton/BackButton';
 
-type Props = {};
-
 const layout = ({
   children,
 }: Readonly<{

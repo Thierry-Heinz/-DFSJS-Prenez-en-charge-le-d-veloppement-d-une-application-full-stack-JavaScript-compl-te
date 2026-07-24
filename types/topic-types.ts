@@ -1,5 +1,3 @@
-import { PrismaPromise } from '@prisma/client';
-
 type Topic = {
   name: string;
   id: number;
