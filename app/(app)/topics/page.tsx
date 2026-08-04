@@ -1,12 +1,18 @@
 import Topic from '@/components/TopicCard/TopicCard';
 import { topicService } from '@/features/topic/topic.service';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Thèmes',
+};
 
 const Topics = async () => {
   const topics = await topicService.getAllUserTopics();
 
   if (!topics) return;
   return (
-    <main className="py-8 flex flex-col items-center">
+    <div className="py-8 flex flex-col items-center">
+      <h1 className="sr-only">Thèmes</h1>
       {topics.length !== 0 ? (
         <section className="grid lg:grid-cols-2 gap-x-[45px] gap-y-[21px] w-full">
           {topics.map((topic) => (
@@ -22,7 +28,7 @@ const Topics = async () => {
       ) : (
         'Pas de thèmes'
       )}
-    </main>
+    </div>
   );
 };
 

@@ -9,6 +9,6 @@ describe('BackButton', () => {
 
   it('should render the back arrow icon', () => {
     render(<BackButton url="/dashboard" />);
-    expect(screen.getByAltText('Flèche de retour')).toBeInTheDocument();
+    expect(screen.getByAltText('Retour')).toBeInTheDocument();
   });
 });

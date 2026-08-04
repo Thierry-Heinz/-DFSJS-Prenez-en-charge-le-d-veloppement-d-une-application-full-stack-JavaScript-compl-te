@@ -11,28 +11,32 @@ const layout = ({
   children: React.ReactNode;
 }>): React.ReactNode => {
   return (
-    <main>
-      <Navbar className="hidden lg:block">
-        <Link href="/">
-          <Logo />
-        </Link>
-      </Navbar>
+    <>
+      <header>
+        <Navbar className="hidden lg:block">
+          <Link href="/">
+            <Logo />
+          </Link>
+        </Navbar>
 
-      <div className="py-4 px-12 absolute">
-        <BackButton url="/" />
-      </div>
+        <div className="flex justify-center block lg:hidden">
+          <Image
+            src="/logo_login.png"
+            width={412}
+            height={238}
+            alt="Monde Dév Logo"
+          />
+        </div>
+      </header>
 
-      <div className="flex justify-center block lg:hidden">
-        <Image
-          src="/logo_login.png"
-          width={412}
-          height={238}
-          alt="Monde Dév Logo"
-        />
-      </div>
+      <main id="main-content">
+        <div className="py-4 px-12 absolute">
+          <BackButton url="/" />
+        </div>
 
-      {children}
-    </main>
+        {children}
+      </main>
+    </>
   );
 };
 

@@ -1,5 +1,10 @@
 import CreatePostForm from '@/components/Forms/CreatePostForm/CreatePostForm';
 import { topicService } from '@/features/topic/topic.service';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Créer un article',
+};
 
 const CreatePost = async () => {
   const topics = await topicService.getTopics();

@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Field, FieldError } from '@/components/ui/field';
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -30,8 +30,17 @@ const CreatePostForm = ({ topics }: CreatePostFormProps): React.ReactNode => {
         <div className="bg-red-100 ">{state.error}</div>
       )}
       <Field className="gap-1 ">
+        <FieldLabel htmlFor="topicId" className="sr-only">
+          Thème
+        </FieldLabel>
         <Select name="topicId">
-          <SelectTrigger className="w-full border-2 border-primary  h-10">
+          <SelectTrigger
+            id="topicId"
+            className="w-full border-2 border-primary  h-10"
+            aria-required="true"
+            aria-invalid={!!errors?.topicId}
+            aria-describedby={errors?.topicId ? 'topicId-error' : undefined}
+          >
             <SelectValue
               placeholder="Sélectionner un thème"
               className="text-xl"
@@ -47,25 +56,43 @@ const CreatePostForm = ({ topics }: CreatePostFormProps): React.ReactNode => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {errors?.topicId && <FieldError>{errors.topicId[0]}</FieldError>}
+        {errors?.topicId && (
+          <FieldError id="topicId-error">{errors.topicId[0]}</FieldError>
+        )}
       </Field>
       <Field className="gap-1">
+        <FieldLabel htmlFor="title" className="sr-only">
+          Titre
+        </FieldLabel>
         <Input
           id="title"
           name="title"
           placeholder="Titre de l'article"
           className="border-2 border-primary text-xl h-10"
+          aria-required="true"
+          aria-invalid={!!errors?.title}
+          aria-describedby={errors?.title ? 'title-error' : undefined}
         />
-        {errors?.title && <FieldError>{errors.title[0]}</FieldError>}
+        {errors?.title && (
+          <FieldError id="title-error">{errors.title[0]}</FieldError>
+        )}
       </Field>
       <Field className="gap-1">
+        <FieldLabel htmlFor="content" className="sr-only">
+          Contenu
+        </FieldLabel>
         <Textarea
           id="content"
           name="content"
           placeholder="Contenu de l'article"
           className="h-[212px] border-2 border-primary text-xl"
+          aria-required="true"
+          aria-invalid={!!errors?.content}
+          aria-describedby={errors?.content ? 'content-error' : undefined}
         />
-        {errors?.content && <FieldError>{errors.content[0]}</FieldError>}
+        {errors?.content && (
+          <FieldError id="content-error">{errors.content[0]}</FieldError>
+        )}
       </Field>
       <Button type="submit" disabled={isPending} className="inline-block">
         {isPending ? '...' : 'Créer'}

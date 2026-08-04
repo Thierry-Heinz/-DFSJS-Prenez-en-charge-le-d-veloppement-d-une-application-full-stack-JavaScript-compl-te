@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Field, FieldError } from '@/components/ui/field';
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { saveProfile } from '@/features/profile/profile.action';
 import { User } from '@/types/user-types';
@@ -36,30 +36,58 @@ const ProfileForm = ({ username, email }: User): React.ReactNode => {
       )}
 
       <Field className="gap-1">
+        <FieldLabel htmlFor="username" className="sr-only">
+          Nom d&apos;utilisateur
+        </FieldLabel>
         <Input
           key={username}
           id="username"
           name="username"
           defaultValue={username}
+          aria-invalid={!!errors?.username}
+          aria-describedby={errors?.username ? 'username-error' : undefined}
         />
-        {errors?.username && <FieldError>{errors.username[0]}</FieldError>}
+        {errors?.username && (
+          <FieldError id="username-error">{errors.username[0]}</FieldError>
+        )}
       </Field>
 
       <Field className="gap-1">
-        <Input key={email} id="newEmail" name="newEmail" defaultValue={email} />
-        {errors?.newEmail && <FieldError>{errors.newEmail[0]}</FieldError>}
+        <FieldLabel htmlFor="newEmail" className="sr-only">
+          Adresse e-mail
+        </FieldLabel>
+        <Input
+          key={email}
+          id="newEmail"
+          name="newEmail"
+          defaultValue={email}
+          aria-invalid={!!errors?.newEmail}
+          aria-describedby={errors?.newEmail ? 'newEmail-error' : undefined}
+        />
+        {errors?.newEmail && (
+          <FieldError id="newEmail-error">{errors.newEmail[0]}</FieldError>
+        )}
       </Field>
 
       <Field className="gap-1">
+        <FieldLabel htmlFor="newPassword" className="sr-only">
+          Nouveau mot de passe
+        </FieldLabel>
         <Input
           ref={newPasswordRef}
           id="newPassword"
           name="newPassword"
-          type="text"
+          type="password"
           placeholder="Mot de passe"
+          aria-invalid={!!errors?.newPassword}
+          aria-describedby={
+            errors?.newPassword ? 'newPassword-error' : undefined
+          }
         />
         {errors?.newPassword && (
-          <FieldError>{errors.newPassword[0]}</FieldError>
+          <FieldError id="newPassword-error">
+            {errors.newPassword[0]}
+          </FieldError>
         )}
       </Field>
 

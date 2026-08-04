@@ -48,17 +48,17 @@ describe('AppNav', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
-  it('should play the exit transition before removing the mobile menu', () => {
+  it('should close the mobile menu when the backdrop is clicked', async () => {
     render(<AppNav />);
 
     fireEvent.click(screen.getByLabelText('Ouvrir le menu'));
-    fireEvent.click(screen.getAllByLabelText('Fermer le menu')[0]);
-
     expect(screen.getByRole('dialog')).toBeInTheDocument();
 
-    fireEvent.transitionEnd(screen.getByTestId('mobile-menu-panel'));
+    fireEvent.click(screen.getAllByLabelText('Fermer le menu')[0]);
 
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument(),
+    );
   });
 
   it('should sign out and redirect to / on logout', async () => {

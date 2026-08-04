@@ -35,9 +35,9 @@ const PostList = ({ posts }: Props) => {
           >
             Trier par
             {sort === 'asc' ? (
-              <ArrowUp data-icon="inline-end" />
+              <ArrowUp data-icon="inline-end" aria-hidden="true" />
             ) : (
-              <ArrowDown data-icon="inline-end" />
+              <ArrowDown data-icon="inline-end" aria-hidden="true" />
             )}
           </Button>
         </div>

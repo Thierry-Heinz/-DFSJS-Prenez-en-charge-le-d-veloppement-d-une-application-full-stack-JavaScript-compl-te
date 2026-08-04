@@ -1,6 +1,18 @@
 import CommentList from '@/components/CommentList/CommentList';
 import CommentForm from '@/components/Forms/CommentForm/CommentForm';
 import { postService } from '@/features/post/post.service';
+import type { Metadata } from 'next';
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> => {
+  const { id } = await params;
+  const post = await postService.getPostByIdWithDetails(+id);
+
+  return { title: post?.title ?? 'Article' };
+};
 
 export const Post = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -12,7 +24,7 @@ export const Post = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!post) return;
 
   return (
-    <main className="md:py-6 md:px-24 p-4 flex flex-col">
+    <div className="md:py-6 md:px-24 p-4 flex flex-col">
       <article className="mb-8">
         <h1 className="font-semibold text-2xl mb-4">{post?.title}</h1>
         <span className="flex gap-8 mb-4 ">
@@ -33,7 +45,7 @@ export const Post = async ({ params }: { params: Promise<{ id: string }> }) => {
           <CommentForm />
         </footer>
       </aside>
-    </main>
+    </div>
   );
 };
 

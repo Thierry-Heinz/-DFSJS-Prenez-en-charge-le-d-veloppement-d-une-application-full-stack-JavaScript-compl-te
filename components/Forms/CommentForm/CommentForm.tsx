@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Field, FieldError } from '@/components/ui/field';
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
 import { createComment } from '@/features/comment/comment.action';
 import Image from 'next/image';
@@ -22,14 +22,21 @@ const CommentForm = (): React.ReactNode => {
         <div className="bg-red-100 ">{state.error}</div>
       )}
       <Field className="gap-1 ">
+        <FieldLabel htmlFor="comment" className="sr-only">
+          Commentaire
+        </FieldLabel>
         <Textarea
           id="comment"
           name="comment"
           placeholder="Écrivez ici votre commentaire"
           className="h-[120px] border-1 border-black text-xl w-full"
           required
+          aria-invalid={!!errors?.comment}
+          aria-describedby={errors?.comment ? 'comment-error' : undefined}
         />
-        {errors?.comment && <FieldError>{errors.comment[0]}</FieldError>}
+        {errors?.comment && (
+          <FieldError id="comment-error">{errors.comment[0]}</FieldError>
+        )}
       </Field>
       <Button
         type="submit"

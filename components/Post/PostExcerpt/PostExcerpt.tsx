@@ -28,9 +28,7 @@ const PostExcerpt = ({
         <span>{formattedDate}</span>
         <span>{author}</span>
       </div>
-      <summary className="line-clamp-4 text-sm text-foreground">
-        {content}
-      </summary>
+      <p className="line-clamp-4 text-sm text-foreground">{content}</p>
     </article>
   );
 };

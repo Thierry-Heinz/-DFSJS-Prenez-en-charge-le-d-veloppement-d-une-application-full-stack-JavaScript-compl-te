@@ -13,7 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'MDD - Monde de Dév',
+  title: {
+    template: '%s | MDD - Monde de Dév',
+    default: 'MDD - Monde de Dév',
+  },
   description: 'Réseau social pour développeurs',
 };
 
@@ -27,6 +30,12 @@ export const RootLayout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-foreground focus:outline focus:outline-2 focus:outline-primary"
+        >
+          Aller au contenu principal
+        </a>
         {children}
       </body>
     </html>

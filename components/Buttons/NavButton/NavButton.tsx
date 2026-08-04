@@ -12,13 +12,17 @@ const NavButton = ({
   text,
   url,
 }: Props): React.ReactNode => {
-  return (
-    <button
-      className={` ${className} text-semibold bg-primary inline-flex items-center justify-center px-6 py-3 rounded-lg transition-colors cursor-pointer`}
-    >
-      {url ? <Link href={url}>{text}</Link> : <>{text}</>}
-    </button>
-  );
+  const buttonClassName = `${className} text-semibold bg-primary inline-flex items-center justify-center px-6 py-3 rounded-lg transition-colors cursor-pointer`;
+
+  if (url) {
+    return (
+      <Link href={url} className={buttonClassName}>
+        {text}
+      </Link>
+    );
+  }
+
+  return <button className={buttonClassName}>{text}</button>;
 };
 
 export default NavButton;

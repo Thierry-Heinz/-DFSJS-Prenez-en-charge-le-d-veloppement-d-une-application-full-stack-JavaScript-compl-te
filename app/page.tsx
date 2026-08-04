@@ -1,9 +1,17 @@
 import Button from '@/components/Buttons/NavButton/NavButton';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Accueil',
+};
 
 const Home = async () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+    <main
+      id="main-content"
+      className="min-h-screen flex flex-col items-center justify-center bg-background"
+    >
       <div className="text-center space-y-8">
         <div className="flex justify-center">
           <div className="text-primary-foreground text-4xl font-bold">
@@ -31,7 +39,7 @@ const Home = async () => {
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

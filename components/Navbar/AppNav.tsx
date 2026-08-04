@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Menu, User } from 'lucide-react';
-import { useState } from 'react';
+import { User } from 'lucide-react';
 import { authClient } from '@/lib/auth/auth-client';
 import MobileMenu, { type NavItem } from './MobileMenu';
 import Logo from '../Logo/Logo';
@@ -15,7 +14,6 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 const AppNav = (): React.ReactNode => {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -47,25 +45,14 @@ const AppNav = (): React.ReactNode => {
           </Link>
         ))}
         <Link href="/profile" aria-label="Profil">
-          <User className="size-12 rounded-full border p-1 bg-gray-300" />
+          <User
+            className="size-12 rounded-full border p-1 bg-gray-300"
+            aria-hidden="true"
+          />
         </Link>
       </nav>
 
-      <button
-        type="button"
-        aria-label="Ouvrir le menu"
-        className="lg:hidden p-2 cursor-pointer"
-        onClick={() => setIsOpen(true)}
-      >
-        <Menu className="size-6" />
-      </button>
-
-      <MobileMenu
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        onLogout={handleLogout}
-        navItems={NAV_ITEMS}
-      />
+      <MobileMenu onLogout={handleLogout} navItems={NAV_ITEMS} />
     </>
   );
 };

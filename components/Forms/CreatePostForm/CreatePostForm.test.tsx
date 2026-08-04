@@ -22,9 +22,10 @@ describe('CreatePostForm', () => {
   });
 
   it('should mount with the topic select, title, content and submit button', () => {
+    screen.getByLabelText('Thème');
     screen.getByText('Sélectionner un thème');
-    screen.getByPlaceholderText("Titre de l'article");
-    screen.getByPlaceholderText('Contenu de l\'article');
+    screen.getByLabelText('Titre');
+    screen.getByLabelText('Contenu');
     screen.getByRole('button', { name: 'Créer' });
   });
 
@@ -83,10 +84,10 @@ describe('CreatePostForm', () => {
       error: 'Une erreur est survenue',
     });
 
-    fireEvent.change(screen.getByPlaceholderText("Titre de l'article"), {
+    fireEvent.change(screen.getByLabelText('Titre'), {
       target: { value: 'Mon titre' },
     });
-    fireEvent.change(screen.getByPlaceholderText("Contenu de l'article"), {
+    fireEvent.change(screen.getByLabelText('Contenu'), {
       target: { value: 'Mon contenu' },
     });
     fireEvent.click(screen.getByRole('button', { name: 'Créer' }));

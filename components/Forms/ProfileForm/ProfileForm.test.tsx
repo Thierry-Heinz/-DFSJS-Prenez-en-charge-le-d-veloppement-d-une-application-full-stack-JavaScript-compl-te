@@ -24,12 +24,14 @@ describe('ProfileForm', () => {
     jest.clearAllMocks();
   });
 
-  it('should mount pre-filled with the current username and email, password field empty and visible', () => {
-    expect(getInput(container, 'username')).toHaveValue('johndoe');
-    expect(getInput(container, 'newEmail')).toHaveValue('user@test.com');
-    const passwordInput = getInput(container, 'newPassword');
+  it('should mount pre-filled with the current username and email, password field empty and masked', () => {
+    expect(screen.getByLabelText("Nom d'utilisateur")).toHaveValue('johndoe');
+    expect(screen.getByLabelText('Adresse e-mail')).toHaveValue(
+      'user@test.com',
+    );
+    const passwordInput = screen.getByLabelText('Nouveau mot de passe');
     expect(passwordInput).toHaveValue('');
-    expect(passwordInput).toHaveAttribute('type', 'text');
+    expect(passwordInput).toHaveAttribute('type', 'password');
   });
 
   it('should display a general error message when the submission fails', async () => {

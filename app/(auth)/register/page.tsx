@@ -1,4 +1,9 @@
 import RegisterForm from '@/components/Forms/RegisterForm/RegisterForm';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Inscription',
+};
 
 const Register = () => {
   return (

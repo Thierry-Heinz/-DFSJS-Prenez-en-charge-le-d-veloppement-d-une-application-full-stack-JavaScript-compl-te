@@ -9,12 +9,7 @@ type Props = {
 const BackButton = ({ url }: Props): React.ReactNode => {
   return (
     <Link href={url}>
-      <Image
-        src="/arrow_back.png"
-        width={41}
-        height={23}
-        alt="Flèche de retour"
-      />
+      <Image src="/arrow_back.png" width={41} height={23} alt="Retour" />
     </Link>
   );
 };

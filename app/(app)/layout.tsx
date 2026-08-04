@@ -19,7 +19,9 @@ const layout = async ({
         <AppNav />
       </Navbar>
 
-      <main className="px-8">{children}</main>
+      <main id="main-content" className="px-8">
+        {children}
+      </main>
     </>
   );
 };
