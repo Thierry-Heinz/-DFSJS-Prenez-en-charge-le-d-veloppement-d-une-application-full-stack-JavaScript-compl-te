@@ -8,6 +8,7 @@ type Props = {
   content: string;
 };
 
+/** Carte résumé d'un article (titre, date, auteur, extrait de contenu) dans une liste. */
 const PostExcerpt = ({
   id,
   title,

@@ -5,6 +5,7 @@ import { Separator as SeparatorPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/** Séparateur shadcn/ui, wrapper stylé de `Separator` Radix. */
 function Separator({
   className,
   orientation = "horizontal",

@@ -4,9 +4,11 @@ import React from 'react';
 type Props = {
   className?: string;
   text: string;
+  /** Si renseignée, le bouton est rendu comme un lien vers cette URL plutôt qu'un `<button>`. */
   url?: string;
 };
 
+/** Bouton d'action stylé, rendu en `<Link>` si `url` est fourni, sinon en `<button>`. */
 const NavButton = ({
   className = 'text-white hover:bg-primary/90',
   text,

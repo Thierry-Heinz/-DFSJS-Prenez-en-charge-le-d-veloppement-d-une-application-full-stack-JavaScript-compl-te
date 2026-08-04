@@ -7,6 +7,11 @@ import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
+/**
+ * Primitives shadcn/ui de composition de champs de formulaire accessibles :
+ * {@link FieldSet}, {@link Field}, {@link FieldLabel}, {@link FieldError} et
+ * composants associés (groupe, légende, description, séparateur).
+ */
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
     <fieldset

@@ -9,6 +9,12 @@ import { authService } from '../auth/auth.service';
 import { postRepository } from './post.repository';
 
 export const postService: PostService = {
+  /**
+   * Crée un nouvel article après vérification de l'existence du topic
+   * et de la session utilisateur.
+   * @param input - Données validées du formulaire de création d'article
+   * @throws AppError si le topic n'existe pas ou si l'utilisateur n'est pas authentifié
+   */
   create: async function (input: CreatePostInput) {
     const { topicId, title, content } = input;
     const intTopicId = +topicId;

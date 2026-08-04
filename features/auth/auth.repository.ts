@@ -5,6 +5,7 @@ import { AuthRepository } from '@/types/auth-types';
 import { auth } from '@/lib/auth/auth';
 import { withBetterAuthErrorHandling } from './auth-error-mapper';
 
+/** Implémentation de {@link AuthRepository} au-dessus de l'API `better-auth`. */
 export const authRepository: AuthRepository = {
   loginWithEmail: function (email, password) {
     return withBetterAuthErrorHandling(() =>

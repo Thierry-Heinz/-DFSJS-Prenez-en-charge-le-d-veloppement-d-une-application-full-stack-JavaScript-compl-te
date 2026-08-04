@@ -1,3 +1,8 @@
+/**
+ * Catalogue centralisé des erreurs métier applicatives : code, message
+ * utilisateur et statut HTTP associé. Source utilisée pour construire les
+ * instances de `AppError`.
+ */
 export const ErrorMessages = {
   // --- Auth ---
   UNAUTHORIZED: { code: 'UNAUTHORIZED', message: 'Unauthorized', status: 401 },

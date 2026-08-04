@@ -8,6 +8,11 @@ import { postService } from './post.service';
 import z from 'zod';
 import { redirect } from 'next/navigation';
 
+/**
+ * Server Action appelée par le formulaire de création d'article.
+ * Valide les données du formulaire, délègue la création au service,
+ * puis redirige vers le dashboard en cas de succès.
+ */
 async function createPostHandler(prevState: unknown, formData: FormData) {
   const parsed = createPostSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) {

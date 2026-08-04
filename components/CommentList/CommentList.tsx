@@ -5,6 +5,7 @@ type Props = {
   comments: CommentWithAuthor[];
 };
 
+/** Liste des commentaires d'un article, avec le nom de leur auteur. */
 const CommentList = ({ comments }: Props): React.ReactNode => {
   return (
     <div className="flex flex-col gap-2 md:gap-8 px-4 md:pl-8 md:pr-30">

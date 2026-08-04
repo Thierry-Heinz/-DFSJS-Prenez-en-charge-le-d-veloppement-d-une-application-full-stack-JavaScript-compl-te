@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { login } from '@/features/auth/auth.action';
 import { useActionState } from 'react';
 
+/** Formulaire de connexion, acceptant un email ou un nom d'utilisateur comme identifiant. */
 const LoginForm = (): React.ReactNode => {
   const [state, formAction, isPending] = useActionState(login, undefined);
   const errors = state && !state.success ? state.fieldErrors : undefined;

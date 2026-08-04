@@ -9,6 +9,14 @@ import { setPasswordSchema } from '../auth/dto/setPassword.schema';
 import { updateProfileSchema } from '../auth/dto/updateProfile.schema';
 import { profileService } from './profile.service';
 
+/**
+ * Server Action appelée par le formulaire de profil.
+ * Valide indépendamment l'identité (nom d'utilisateur), l'email (seulement
+ * s'il a changé) et le mot de passe (seulement s'il est renseigné), agrège
+ * les erreurs de tous les champs avant de lever une seule {@link ValidationError},
+ * puis applique uniquement les changements validés.
+ * @param currentEmail - Email actuel de l'utilisateur, pour détecter une demande de changement
+ */
 async function saveProfileHandler(
   currentEmail: string,
   prevState: unknown,

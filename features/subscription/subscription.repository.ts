@@ -3,6 +3,7 @@ import 'server-only';
 import { prisma } from '@/lib/prisma';
 import { SubscriptionRepository } from '@/types/subscription-types';
 
+/** Implémentation de {@link SubscriptionRepository} au-dessus de Prisma. */
 export const subscriptionRepository: SubscriptionRepository = {
   create: async function (topicId, userId) {
     return await prisma.subscription.create({

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+/** Logo de l'application, chargé en priorité (`loading="eager"`). */
 const Logo = (): React.ReactNode => {
   return (
     <Image

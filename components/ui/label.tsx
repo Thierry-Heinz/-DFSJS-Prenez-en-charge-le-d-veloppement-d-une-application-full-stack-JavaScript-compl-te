@@ -5,6 +5,7 @@ import { Label as LabelPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/** Label shadcn/ui, wrapper stylé de `Label` Radix. */
 function Label({
   className,
   ...props

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+/** Validation du formulaire de mise à jour du nom d'utilisateur du profil. */
 export const updateProfileSchema = z.object({
   username: z
     .string()

@@ -8,7 +8,10 @@ import { ValidationError } from '@/lib/errors/validation-error';
 import z from 'zod';
 import { revalidatePath } from 'next/cache';
 
-// subscription.action.ts
+/**
+ * Server Action d'abonnement à un topic, appelée depuis la liste des topics.
+ * Revalide les pages `/topics` et `/profile` après succès.
+ */
 async function subscribeHandler(
   topicId: number,
   prevState: unknown,
@@ -27,6 +30,10 @@ export const subscribeAction = withAuth(
   withActionErrorHandling(subscribeHandler),
 );
 
+/**
+ * Server Action de désabonnement d'un topic, appelée depuis la liste des topics.
+ * Revalide les pages `/topics` et `/profile` après succès.
+ */
 async function unsubscribeHandler(
   topicId: number,
   prevState: unknown,

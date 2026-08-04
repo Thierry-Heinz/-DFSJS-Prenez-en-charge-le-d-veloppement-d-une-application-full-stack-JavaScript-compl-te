@@ -6,6 +6,11 @@ import { ErrorMessages } from '@/lib/errors/errorMessages';
 import { SubscriptionService } from '@/types/subscription-types';
 import { subscriptionRepository } from './subscription.repository';
 
+/**
+ * Implémentation de {@link SubscriptionService}. Chaque méthode exige une
+ * session utilisateur active.
+ * @throws AppError si aucune session n'est active
+ */
 export const subscriptionService: SubscriptionService = {
   subscribe: async function (topicId) {
     const userExist = await authService.getSession();

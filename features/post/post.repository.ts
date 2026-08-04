@@ -3,6 +3,7 @@ import 'server-only';
 import { prisma } from '@/lib/prisma';
 import { PostRepository } from '@/types/post-types';
 
+/** Implémentation de {@link PostRepository} au-dessus de Prisma. */
 export const postRepository: PostRepository = {
   createPost: async function ({ userId, topicId, title, content }) {
     return await prisma.post.create({

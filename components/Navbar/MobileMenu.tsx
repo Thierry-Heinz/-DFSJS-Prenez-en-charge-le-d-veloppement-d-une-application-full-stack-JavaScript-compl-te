@@ -9,10 +9,13 @@ import { usePathname } from 'next/navigation';
 export type NavItem = { label: string; href: string };
 
 type Props = {
+  /** Appelée lors du clic sur "Se déconnecter" */
   onLogout: () => void;
+  /** Liens de navigation à afficher dans le panneau */
   navItems: NavItem[];
 };
 
+/** Menu de navigation mobile, affiché en panneau coulissant (Radix Dialog) sous `lg`. */
 const MobileMenu = ({ onLogout, navItems }: Props): React.ReactNode => {
   const pathname = usePathname();
 

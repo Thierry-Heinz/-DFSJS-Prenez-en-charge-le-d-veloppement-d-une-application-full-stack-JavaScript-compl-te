@@ -7,6 +7,12 @@ const betterAuthErrorMap: Record<string, keyof typeof ErrorMessages> = {
   USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL: 'USER_ALREADY_EXISTS',
 };
 
+/**
+ * Enveloppe un appel à l'API `better-auth` pour traduire ses {@link APIError}
+ * en {@link AppError} métier, via `betterAuthErrorMap`. Les codes non
+ * répertoriés retombent sur `UNKNOWN_AUTH_ERROR`.
+ * @param fn - L'appel `better-auth` à exécuter
+ */
 export async function withBetterAuthErrorHandling<T>(
   fn: () => Promise<T>,
 ): Promise<T> {

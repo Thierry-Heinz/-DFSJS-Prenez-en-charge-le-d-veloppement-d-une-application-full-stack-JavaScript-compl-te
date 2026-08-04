@@ -13,6 +13,10 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Thèmes', href: '/topics' },
 ];
 
+/**
+ * Contenu de la barre de navigation applicative (logo, liens principaux,
+ * déconnexion, accès profil), avec repli en menu mobile via {@link MobileMenu}.
+ */
 const AppNav = (): React.ReactNode => {
   const router = useRouter();
   const pathname = usePathname();

@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { register } from '@/features/auth/auth.action';
 import React, { useActionState } from 'react';
 
+/** Formulaire d'inscription : nom d'utilisateur, email et mot de passe. */
 const RegisterForm = (): React.ReactNode => {
   const [state, formAction, isPending] = useActionState(register, undefined);
   const errors = state && !state.success ? state.fieldErrors : undefined;

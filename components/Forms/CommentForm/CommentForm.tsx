@@ -8,6 +8,10 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import React, { useActionState } from 'react';
 
+/**
+ * Formulaire d'ajout de commentaire sur l'article courant, dont l'id est lu
+ * depuis les paramètres de route.
+ */
 const CommentForm = (): React.ReactNode => {
   const params = useParams<{ id: string }>();
   const [state, formAction, isPending] = useActionState(

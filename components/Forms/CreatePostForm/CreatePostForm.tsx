@@ -17,9 +17,11 @@ import { createPost } from '@/features/post/post.action';
 import { useActionState } from 'react';
 
 type CreatePostFormProps = {
+  /** Liste des topics disponibles à proposer dans le select */
   topics: { name: string; id: number }[];
 };
 
+/** Formulaire de création d'un article, avec sélection du topic associé. */
 const CreatePostForm = ({ topics }: CreatePostFormProps): React.ReactNode => {
   const [state, formAction, isPending] = useActionState(createPost, undefined);
   const errors = state && !state.success ? state.fieldErrors : undefined;

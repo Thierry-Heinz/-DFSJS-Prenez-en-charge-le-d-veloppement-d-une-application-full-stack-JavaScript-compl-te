@@ -8,6 +8,10 @@ import { createCommentSchema } from './dto/createComment.schema';
 import { commentService } from './comment.service';
 import { revalidatePath } from 'next/cache';
 
+/**
+ * Server Action appelée par le formulaire d'ajout de commentaire.
+ * Valide les données, crée le commentaire puis revalide la page de l'article.
+ */
 async function createCommentHandler(
   postId: number,
   prevState: unknown,

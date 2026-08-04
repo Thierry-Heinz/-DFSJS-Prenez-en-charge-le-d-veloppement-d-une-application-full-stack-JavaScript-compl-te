@@ -6,6 +6,7 @@ import { Select as SelectPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/** Primitives shadcn/ui de menu déroulant, wrapper stylé de `Select` Radix. */
 function Select({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Root>) {

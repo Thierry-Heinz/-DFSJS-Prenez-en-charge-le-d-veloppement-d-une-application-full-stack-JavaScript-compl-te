@@ -16,6 +16,11 @@ import {
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
+/**
+ * Primitives shadcn/ui reliant `react-hook-form` aux composants de champ :
+ * {@link Form} (= `FormProvider`), {@link FormField}, {@link FormItem},
+ * {@link FormLabel}, {@link FormControl}, {@link FormDescription}, {@link FormMessage}.
+ */
 const Form = FormProvider
 
 type FormFieldContextValue<

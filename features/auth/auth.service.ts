@@ -7,7 +7,12 @@ import { authRepository } from './auth.repository';
 import { LoginInput } from './dto/login.schema';
 import { RegisterInput } from './dto/register.schema';
 
+/** Implémentation de {@link AuthService}. */
 export const authService: AuthService = {
+  /**
+   * Détermine si l'identifiant fourni est un email ou un nom d'utilisateur
+   * et route la connexion vers la méthode correspondante.
+   */
   login: async function (input: LoginInput) {
     const { identifier, password } = input;
     const isEmail = isValidEmail(identifier);

@@ -9,6 +9,7 @@ export type LoginUsernameResult = Awaited<
 export type RegisterResult = Awaited<ReturnType<typeof auth.api.signUpEmail>>;
 export type Session = Awaited<ReturnType<typeof auth.api.getSession>>;
 
+/** Accès aux opérations d'authentification `better-auth` (login, register, session, logout). */
 export interface AuthRepository {
   loginWithEmail(email: string, password: string): Promise<LoginEmailResult>;
   loginWithUsername(
@@ -24,7 +25,15 @@ export interface AuthRepository {
   getSession(): Promise<Session>;
 }
 
+/**
+ * Logique métier d'authentification : accepte indifféremment un login par
+ * email ou par nom d'utilisateur selon la forme de {@link LoginInput}.
+ */
 export interface AuthService {
+  /**
+   * Détermine si l'identifiant fourni est un email ou un nom d'utilisateur
+   * et route la connexion vers la méthode correspondante.
+   */
   login(input: LoginInput): Promise<LoginEmailResult | LoginUsernameResult>;
   register(input: RegisterInput): Promise<RegisterResult>;
   getSession(): Promise<Session>;

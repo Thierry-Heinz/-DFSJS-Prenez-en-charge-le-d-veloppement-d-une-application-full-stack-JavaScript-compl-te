@@ -7,6 +7,11 @@ import { saveProfile } from '@/features/profile/profile.action';
 import { User } from '@/types/user-types';
 import { useActionState, useEffect, useRef } from 'react';
 
+/**
+ * Formulaire de mise à jour du profil : nom d'utilisateur, email et mot de
+ * passe, chaque champ n'étant appliqué que s'il a été modifié. Réinitialise
+ * le champ mot de passe après un enregistrement réussi.
+ */
 const ProfileForm = ({ username, email }: User): React.ReactNode => {
   const newPasswordRef = useRef<HTMLInputElement>(null);
 

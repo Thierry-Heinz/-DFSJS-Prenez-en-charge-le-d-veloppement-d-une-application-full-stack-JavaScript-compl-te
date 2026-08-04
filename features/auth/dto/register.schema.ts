@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+/**
+ * Validation du formulaire d'inscription : email, nom d'utilisateur
+ * (3-30 caractères alphanumériques, `_` et `.`) et mot de passe fort
+ * (min. 8 caractères, majuscule, minuscule, chiffre, caractère spécial).
+ */
 export const registerSchema = z.object({
   email: z.email(),
   username: z

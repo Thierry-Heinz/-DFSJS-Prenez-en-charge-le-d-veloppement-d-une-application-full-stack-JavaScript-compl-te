@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/** Primitives shadcn/ui de mise en page d'une carte : {@link Card} et ses sous-composants (`Header`, `Title`, `Description`, `Action`, `Content`, `Footer`). */
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

@@ -38,6 +38,7 @@ const buttonVariants = cva(
   }
 )
 
+/** Bouton shadcn/ui : variantes de style (`variant`) et de taille (`size`), rendu en tant qu'enfant via `asChild`. */
 function Button({
   className,
   variant = "default",

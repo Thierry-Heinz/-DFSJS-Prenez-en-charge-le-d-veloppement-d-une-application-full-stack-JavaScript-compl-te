@@ -11,6 +11,7 @@ type Props = {
   posts: PostWithAuthor[];
 };
 
+/** Liste triable (par date) des articles, avec accès à la création d'un nouvel article. */
 const PostList = ({ posts }: Props) => {
   const [sort, setSort] = useState('desc');
 

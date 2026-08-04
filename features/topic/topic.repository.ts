@@ -1,6 +1,11 @@
 import { prisma } from '@/lib/prisma';
 import { TopicRepository, TopicWithSubscription } from '@/types/topic-types';
 
+/**
+ * Convertit un topic Prisma (avec ses abonnements filtrés par utilisateur)
+ * en {@link TopicWithSubscription}, en dérivant `isSubscribed` de la présence
+ * d'au moins un abonnement dans le tableau.
+ */
 function toDomainTopic(raw: {
   id: number;
   name: string;
@@ -15,6 +20,7 @@ function toDomainTopic(raw: {
   };
 }
 
+/** Implémentation de {@link TopicRepository} au-dessus de Prisma. */
 export const topicRepository: TopicRepository = {
   findAllTopics: async function () {
     return await prisma.topic.findMany({

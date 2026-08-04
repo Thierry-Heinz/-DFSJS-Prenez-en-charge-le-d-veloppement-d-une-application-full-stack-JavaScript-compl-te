@@ -5,6 +5,7 @@ type Props = {
   className?: string;
 };
 
+/** Conteneur de mise en page générique pour une barre de navigation. */
 export function Navbar({ children, className }: Props): React.ReactNode {
   return (
     <nav

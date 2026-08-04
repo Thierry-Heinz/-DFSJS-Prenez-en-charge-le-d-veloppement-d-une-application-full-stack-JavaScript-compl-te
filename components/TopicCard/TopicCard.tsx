@@ -12,9 +12,15 @@ type Props = {
   title: string;
   description: string | null;
   topicId: number;
+  /** État d'abonnement de l'utilisateur courant à ce topic, détermine le libellé et l'action du bouton */
   isSubscribed: boolean;
 };
 
+/**
+ * Carte d'un topic avec bouton d'(dés)abonnement. Le style et le texte du
+ * bouton dépendent à la fois de `isSubscribed` et de la page courante
+ * (`/profile` affiche un bouton de désabonnement actif).
+ */
 const TopicCard = ({ title, description, topicId, isSubscribed }: Props) => {
   const pathname = usePathname();
   const [state, formAction, isPending] = useActionState(

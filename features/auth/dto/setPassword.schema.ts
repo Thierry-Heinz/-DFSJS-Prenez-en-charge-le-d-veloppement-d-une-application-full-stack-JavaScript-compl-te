@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+/** Validation du formulaire de changement de mot de passe (règles de force identiques à l'inscription). */
 export const setPasswordSchema = z.object({
   newPassword: z
     .string()
