@@ -22,7 +22,7 @@ const posts: PostWithAuthor[] = [
 ];
 
 function getRenderedTitles() {
-  return screen.getAllByRole('heading', { level: 3 }).map((el) => el.textContent);
+  return screen.getAllByRole('heading', { level: 2 }).map((el) => el.textContent);
 }
 
 describe('PostList', () => {

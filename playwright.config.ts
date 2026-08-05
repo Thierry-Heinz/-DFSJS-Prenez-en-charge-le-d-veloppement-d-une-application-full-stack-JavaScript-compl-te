@@ -55,7 +55,7 @@ export default defineConfig({
     },
     {
       name: 'no-auth',
-      testMatch: ['auth.spec.ts', 'guards.spec.ts'],
+      testMatch: ['auth.spec.ts', 'guards.spec.ts', 'accessibility-public.spec.ts'],
       use: { ...devices['Desktop Chrome'] },
     },
     {
@@ -65,8 +65,19 @@ export default defineConfig({
         'topics.spec.ts',
         'posts.spec.ts',
         'profile.spec.ts',
+        'accessibility-authenticated.spec.ts',
       ],
       use: { ...devices['Desktop Chrome'], storageState: 'e2e/.auth/user.json' },
+      dependencies: ['setup'],
+    },
+    {
+      // Viewport mobile (sous le breakpoint `lg` de Tailwind, 1024px) pour
+      // couvrir le menu hamburger (MobileMenu.tsx), invisible en desktop.
+      // Device Chromium (pas WebKit) pour rester cohérent avec le choix
+      // "Chromium uniquement" déjà fait pour ce projet.
+      name: 'mobile',
+      testMatch: ['mobile-nav.spec.ts'],
+      use: { ...devices['Pixel 5'], storageState: 'e2e/.auth/user.json' },
       dependencies: ['setup'],
     },
   ],

@@ -31,7 +31,11 @@ const AppNav = (): React.ReactNode => {
       <Link href="/dashboard">
         <Logo />
       </Link>
-      <nav className="hidden items-center gap-8 lg:flex">
+      {/* `div` plutôt que `nav` : le conteneur `Navbar` (Navbar.tsx) est déjà
+          le landmark de navigation pour cette région, un second `<nav>`
+          imbriqué sans libellé distinct viole la règle d'accessibilité
+          axe-core `landmark-unique`. */}
+      <div className="hidden items-center gap-8 lg:flex">
         <button
           onClick={handleLogout}
           aria-label="Se déconnecter"
@@ -54,7 +58,7 @@ const AppNav = (): React.ReactNode => {
             aria-hidden="true"
           />
         </Link>
-      </nav>
+      </div>
 
       <MobileMenu onLogout={handleLogout} navItems={NAV_ITEMS} />
     </>

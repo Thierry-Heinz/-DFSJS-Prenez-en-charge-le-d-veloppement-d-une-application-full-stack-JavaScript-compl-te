@@ -21,9 +21,9 @@ const PostExcerpt = ({
   return (
     <article className="flex flex-col gap-2 rounded-lg bg-muted p-4">
       <Link href={`/post/${id}`}>
-        <h3 className="inline text-base font-bold text-foreground hover:underline">
+        <h2 className="inline text-base font-bold text-foreground hover:underline">
           {title}
-        </h3>
+        </h2>
       </Link>
       <div className="flex gap-4 text-sm text-foreground">
         <span>{formattedDate}</span>

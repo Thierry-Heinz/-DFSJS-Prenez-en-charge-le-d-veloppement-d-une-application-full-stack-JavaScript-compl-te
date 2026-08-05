@@ -18,13 +18,13 @@ test("le tri par date inverse l'ordre des deux articles seedés", async ({
   await page.goto('/dashboard');
 
   // Tri par défaut (desc) : le second article seedé (le plus récent) apparaît en premier.
-  await expect(page.locator('article h3').first()).toHaveText(
+  await expect(page.locator('article h2').first()).toHaveText(
     E2E_POST_TITLE_2,
   );
 
   await page.getByRole('button', { name: 'Trier par date' }).click();
 
-  await expect(page.locator('article h3').first()).toHaveText(
+  await expect(page.locator('article h2').first()).toHaveText(
     E2E_POST_TITLE,
   );
 });
