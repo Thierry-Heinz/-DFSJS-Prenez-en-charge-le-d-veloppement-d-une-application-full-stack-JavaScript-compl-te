@@ -25,14 +25,14 @@ test('la création échoue si aucun thème n’est sélectionné', async ({
   // aucune contrainte de non-vacuité sur titre/contenu (juste `z.string()`),
   // donc ce n'est pas un chemin d'échec observable actuellement. Le vrai
   // échec métier se produit quand aucun thème n'est choisi : le service
-  // rejette alors avec une erreur générique "topic not found".
+  // rejette alors avec l'erreur "Thème introuvable".
   await page.goto('/post/create');
   await page.getByLabel('Titre').fill('Titre sans thème sélectionné');
   await page.getByLabel('Contenu').fill('Contenu sans thème sélectionné.');
   await page.getByRole('button', { name: 'Créer' }).click();
 
   await expect(page).toHaveURL('/post/create');
-  await expect(page.getByText('topic not found')).toBeVisible();
+  await expect(page.getByText('Thème introuvable')).toBeVisible();
 });
 
 test('ouvrir un article depuis le dashboard affiche son détail et ses commentaires', async ({

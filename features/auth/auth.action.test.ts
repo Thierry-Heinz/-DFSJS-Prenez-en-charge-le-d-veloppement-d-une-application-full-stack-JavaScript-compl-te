@@ -89,7 +89,7 @@ describe('auth.action - login', () => {
       success: false,
       error: 'Validation échouée',
       fieldErrors: {
-        identifier: ['Identifier too short'],
+        identifier: ['Au moins 3 caractères'],
       },
     });
   });
@@ -213,10 +213,10 @@ describe('auth.action - register', () => {
     });
   });
 
-  it('should display error if the username is already taken', async () => {
+  it('should display a generic error from the service', async () => {
     jest
       .mocked(authService.register)
-      .mockRejectedValue(new AppError(ErrorMessages.USER_CONFLICT));
+      .mockRejectedValue(new AppError(ErrorMessages.UNKNOWN_AUTH_ERROR));
     const registerFormData = buildFormData({
       username: 'Test',
       email: 'test@test.com',
@@ -227,7 +227,7 @@ describe('auth.action - register', () => {
 
     expect(response).toEqual({
       success: false,
-      error: 'User already exists',
+      error: "Une erreur d'authentification est survenue",
     });
   });
 

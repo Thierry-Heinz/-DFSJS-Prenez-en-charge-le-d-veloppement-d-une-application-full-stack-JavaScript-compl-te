@@ -6,7 +6,7 @@ import { z } from 'zod';
  * (min. 8 caractères, majuscule, minuscule, chiffre, caractère spécial).
  */
 export const registerSchema = z.object({
-  email: z.email(),
+  email: z.email('Adresse e-mail invalide'),
   username: z
     .string()
     .min(3, 'Au moins 3 caractères')

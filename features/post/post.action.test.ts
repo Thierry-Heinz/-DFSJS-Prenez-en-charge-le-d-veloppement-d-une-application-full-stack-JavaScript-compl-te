@@ -84,7 +84,7 @@ describe('post.action - createPost', () => {
 
     expect(response).toEqual({
       success: false,
-      error: 'topic not found',
+      error: 'Thème introuvable',
     });
   });
 

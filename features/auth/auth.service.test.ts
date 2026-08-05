@@ -117,7 +117,7 @@ describe('auth.service - register', () => {
     );
   });
 
-  it('should trigger an error if username is already taken', async () => {
+  it('should propagate a generic error from the repository', async () => {
     const input = {
       username: 'Test',
       email: 'test@test.com',
@@ -126,9 +126,9 @@ describe('auth.service - register', () => {
 
     jest
       .mocked(authRepository.register)
-      .mockRejectedValue(new AppError(ErrorMessages.USER_CONFLICT));
+      .mockRejectedValue(new AppError(ErrorMessages.UNKNOWN_AUTH_ERROR));
     await expect(authService.register(input)).rejects.toThrow(
-      'User already exists',
+      "Une erreur d'authentification est survenue",
     );
   });
 

@@ -81,7 +81,7 @@ describe('comment.action - createComment', () => {
 
     expect(response).toEqual({
       success: false,
-      error: 'post not found',
+      error: 'Article introuvable',
     });
   });
 

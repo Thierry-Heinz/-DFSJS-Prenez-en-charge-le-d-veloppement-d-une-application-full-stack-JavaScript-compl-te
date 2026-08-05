@@ -64,7 +64,7 @@ describe('LoginForm', () => {
     jest.mocked(login).mockResolvedValue({
       success: false,
       error: 'Validation échouée',
-      fieldErrors: { identifier: ['Identifier too short'] },
+      fieldErrors: { identifier: ['Au moins 3 caractères'] },
     });
 
     fireEvent.change(screen.getByLabelText("E-mail ou nom d'utilisateur"), {
@@ -76,7 +76,9 @@ describe('LoginForm', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
 
-    expect(await screen.findByText('Identifier too short')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Au moins 3 caractères'),
+    ).toBeInTheDocument();
   });
   it('should display error if identifier username is wrong', async () => {
     jest.mocked(login).mockResolvedValue({
