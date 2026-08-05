@@ -7,7 +7,7 @@ const layout = ({
 }>) => {
   return (
     <>
-      <div className="absolute px-8 py-8">
+      <div className="px-8 py-8 lg:absolute">
         <BackButton url="/dashboard" />
       </div>
       {children}
