@@ -7,10 +7,20 @@ import dotenv from 'dotenv';
 // `globalSetup` (db push + seed) ciblent la même base, jamais celle de dev.
 dotenv.config({ path: path.resolve(__dirname, '.env.test') });
 
+// Port dédié au serveur Next.js lancé pour les tests e2e, distinct du 3000
+// utilisé par `npm run dev` : évite tout conflit si un dev-server tourne déjà.
+const E2E_PORT = 3100;
+const E2E_BASE_URL = `http://localhost:${E2E_PORT}`;
+
 const e2eEnv = {
   DATABASE_URL: process.env.DATABASE_URL!,
   BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET!,
-  BETTER_AUTH_URL: process.env.BETTER_AUTH_URL!,
+  BETTER_AUTH_URL: E2E_BASE_URL,
+  PORT: String(E2E_PORT),
+  // Next verrouille un seul `next dev` par `distDir` (pas par port) : sans
+  // ça, lancer les tests e2e alors que `npm run dev` tourne déjà échoue
+  // avec "Another next dev server is already running".
+  NEXT_DIST_DIR: '.next-e2e',
 };
 
 export default defineConfig({
@@ -23,7 +33,7 @@ export default defineConfig({
   globalSetup: require.resolve('./e2e/global-setup.ts'),
 
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: E2E_BASE_URL,
     trace: 'on-first-retry',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
@@ -31,7 +41,7 @@ export default defineConfig({
 
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3000',
+    url: E2E_BASE_URL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
     env: e2eEnv,

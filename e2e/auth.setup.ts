@@ -9,7 +9,13 @@ const authFile = 'e2e/.auth/user.json';
  * la connexion via l'UI se fait ici, pas dans `global-setup.ts`.
  */
 setup('authenticate', async ({ page }) => {
-  await page.goto('/login');
+  // Le check de disponibilité de `webServer` peut se déclencher avant que
+  // Next.js n'accepte vraiment des connexions (race connue avec `next dev`,
+  // notamment en UI mode) : on retente la première navigation plutôt que
+  // de dépendre uniquement de cette garantie.
+  await expect(async () => {
+    await page.goto('/login', { timeout: 5_000 });
+  }).toPass({ timeout: 60_000 });
   await page.getByLabel("E-mail ou nom d'utilisateur").fill(E2E_USER.email);
   await page.getByLabel('Mot de passe').fill(E2E_USER.password);
   await page.getByRole('button', { name: 'Se connecter' }).click();
