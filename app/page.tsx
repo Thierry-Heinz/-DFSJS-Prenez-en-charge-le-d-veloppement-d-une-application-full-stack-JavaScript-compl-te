@@ -24,7 +24,7 @@ const Home = async () => {
           </div>
         </div>
 
-        <h1 className="text-3xl font-bold text-foreground">Monde de Dév</h1>
+        <h1 className="sr-only">Monde de Dév</h1>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
