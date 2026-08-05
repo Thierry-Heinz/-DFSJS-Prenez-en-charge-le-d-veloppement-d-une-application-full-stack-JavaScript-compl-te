@@ -24,17 +24,22 @@ npm install
 
 ### Base de données (Docker)
 
-Lancer une instance PostgreSQL en local avec Docker :
+Lancer les instances PostgreSQL en local avec Docker Compose :
 
 ```bash
-docker run --name mdd-postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=mdd_db -p 5432:5432 -d postgres:17
+docker compose up -d
 ```
 
-Pour arrêter / relancer le conteneur :
+Cela démarre deux conteneurs distincts :
+
+- `mdd-postgres-dev` (port 5432, base `mdd_db`) : développement
+- `mdd-postgres-e2e` (port 5433, base `mdd_e2e_db`) : tests e2e (voir plus bas)
+
+Pour arrêter / relancer les conteneurs :
 
 ```bash
-docker stop mdd-postgres
-docker start mdd-postgres
+docker compose stop
+docker compose start
 ```
 
 ### Configuration
@@ -64,6 +69,27 @@ npm run dev
 ```
 
 L'application sera accessible sur [http://localhost:3000](http://localhost:3000).
+
+## Tests
+
+Tests unitaires et d'intégration (Jest + React Testing Library) :
+
+```bash
+npm run test
+npm run test:coverage
+```
+
+Tests end-to-end (Playwright), contre la base dédiée `mdd_e2e_db` :
+
+```bash
+docker compose up -d   # si ce n'est pas déjà fait
+npm run test:e2e       # navigateur headless
+npm run test:e2e:ui    # mode UI interactif pour le debug
+```
+
+Chaque run réinitialise entièrement `mdd_e2e_db` et réinsère les données de
+référence (`e2e/global-setup.ts` + `e2e/seed.ts`) avant d'exécuter la suite,
+ce qui ne touche jamais la base de développement `mdd_db`.
 
 ## Tech Stack
 

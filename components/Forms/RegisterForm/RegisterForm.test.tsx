@@ -49,7 +49,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test.com', password: 'Test!1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(
       await screen.findByText('Un compte existe déjà avec cet email'),
@@ -63,7 +63,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test.com', password: 'Test!1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(await screen.findByText('User already exists')).toBeInTheDocument();
   });
@@ -76,7 +76,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test', password: 'Test!1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(await screen.findByText('Invalid email format')).toBeInTheDocument();
   });
@@ -89,7 +89,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Te', email: 'test@test.com', password: 'Test!1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(
       await screen.findByText('Too small: expected string to have >=3 characters'),
@@ -104,7 +104,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test.com', password: 'T!1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(await screen.findByText('Au moins 8 caractères')).toBeInTheDocument();
   });
@@ -117,7 +117,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test.com', password: 'TEST!1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(
       await screen.findByText('Au moins une lettre minuscule'),
@@ -132,7 +132,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test.com', password: 'test!1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(
       await screen.findByText('Au moins une lettre majuscule'),
@@ -147,7 +147,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test.com', password: 'test!test' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(await screen.findByText('Au moins un chiffre')).toBeInTheDocument();
   });
@@ -160,7 +160,7 @@ describe('RegisterForm', () => {
     });
 
     fillForm({ username: 'Test', email: 'test@test.com', password: 'test1234' });
-    fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
+    fireEvent.click(screen.getByRole('button', { name: "S'inscrire" }));
 
     expect(
       await screen.findByText('Au moins un caractère spécial'),

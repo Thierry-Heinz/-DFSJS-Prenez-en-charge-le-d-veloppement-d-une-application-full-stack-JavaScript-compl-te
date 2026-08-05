@@ -32,7 +32,7 @@ const RegisterForm = (): React.ReactNode => {
         {errors?.password && <FieldError>{errors.password[0]}</FieldError>}
       </Field>
       <Button type="submit" disabled={isPending}>
-        {isPending ? '...' : 'Se connecter'}
+        {isPending ? '...' : "S'inscrire"}
       </Button>
     </form>
   );

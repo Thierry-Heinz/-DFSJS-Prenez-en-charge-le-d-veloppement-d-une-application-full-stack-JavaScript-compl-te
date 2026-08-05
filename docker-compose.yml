@@ -1,0 +1,38 @@
+services:
+  postgres-dev:
+    image: postgres:17
+    container_name: mdd-postgres-dev
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mdd_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - mdd-postgres-dev-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U user -d mdd_db']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  postgres-e2e:
+    image: postgres:17
+    container_name: mdd-postgres-e2e
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mdd_e2e_db
+    ports:
+      - '5433:5432'
+    volumes:
+      - mdd-postgres-e2e-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U user -d mdd_e2e_db']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mdd-postgres-dev-data:
+  mdd-postgres-e2e-data:
