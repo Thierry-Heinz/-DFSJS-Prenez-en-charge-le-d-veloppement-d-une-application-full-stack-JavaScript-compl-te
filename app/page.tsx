@@ -20,6 +20,8 @@ const Home = async () => {
               width={412}
               height={238}
               alt="Monde Dév Logo"
+              priority
+              fetchPriority="high"
             />
           </div>
         </div>
