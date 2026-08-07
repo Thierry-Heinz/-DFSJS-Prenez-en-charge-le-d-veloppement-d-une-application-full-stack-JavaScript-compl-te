@@ -38,7 +38,7 @@ function buildFormData(fields: Record<string, string>) {
 
 function mockSession() {
   jest.mocked(authService.getSession).mockResolvedValue({
-    user: { id: 'user-1' },
+    user: { id: 'user-1', username: 'johndoe', email: 'user@test.com' },
   } as Awaited<ReturnType<typeof authService.getSession>>);
 }
 
@@ -51,9 +51,9 @@ describe('profile.action - saveProfile', () => {
     jest.mocked(authService.getSession).mockResolvedValue(null);
     const formData = buildFormData({ username: 'johndoe', newEmail: 'user@test.com' });
 
-    await expect(
-      saveProfile('user@test.com', undefined, formData),
-    ).rejects.toThrow('NEXT_REDIRECT:/');
+    await expect(saveProfile(undefined, formData)).rejects.toThrow(
+      'NEXT_REDIRECT:/',
+    );
     expect(redirect).toHaveBeenCalledWith('/');
     expect(profileService.updateUser).not.toHaveBeenCalled();
   });
@@ -62,7 +62,7 @@ describe('profile.action - saveProfile', () => {
     mockSession();
     const formData = buildFormData({ username: 'ab', newEmail: 'user@test.com' });
 
-    const response = await saveProfile('user@test.com', undefined, formData);
+    const response = await saveProfile(undefined, formData);
 
     expect(response).toMatchObject({
       success: false,
@@ -72,26 +72,43 @@ describe('profile.action - saveProfile', () => {
     expect(profileService.updateUser).not.toHaveBeenCalled();
   });
 
-  it('should only update the username when the email is unchanged and no password is provided', async () => {
+  it('should only update the username when it changed, leaving email and password untouched', async () => {
     mockSession();
-    const formData = buildFormData({ username: 'johndoe', newEmail: 'user@test.com' });
+    const formData = buildFormData({
+      username: 'newusername',
+      newEmail: 'user@test.com',
+    });
 
-    const response = await saveProfile('user@test.com', undefined, formData);
+    const response = await saveProfile(undefined, formData);
 
     expect(response).toEqual({ success: true, data: undefined });
-    expect(profileService.updateUser).toHaveBeenCalledWith('johndoe');
+    expect(profileService.updateUser).toHaveBeenCalledWith('newusername');
     expect(profileService.changeEmail).not.toHaveBeenCalled();
     expect(profileService.setPassword).not.toHaveBeenCalled();
     expect(revalidatePath).toHaveBeenCalledWith('/profile');
   });
 
-  it('should not change the email when the newEmail field is missing from the form data', async () => {
+  it('should not update the username when it is unchanged from the session', async () => {
+    mockSession();
+    const formData = buildFormData({ username: 'johndoe', newEmail: 'user@test.com' });
+
+    const response = await saveProfile(undefined, formData);
+
+    expect(response).toEqual({ success: true, data: undefined });
+    expect(profileService.updateUser).not.toHaveBeenCalled();
+  });
+
+  it('should return a field error when the newEmail field is missing from the form data', async () => {
     mockSession();
     const formData = buildFormData({ username: 'johndoe' });
 
-    const response = await saveProfile('', undefined, formData);
+    const response = await saveProfile(undefined, formData);
 
-    expect(response).toEqual({ success: true, data: undefined });
+    expect(response).toMatchObject({
+      success: false,
+      error: 'Validation échouée',
+      fieldErrors: { newEmail: expect.any(Array) },
+    });
     expect(profileService.changeEmail).not.toHaveBeenCalled();
   });
 
@@ -99,7 +116,7 @@ describe('profile.action - saveProfile', () => {
     mockSession();
     const formData = buildFormData({ username: 'johndoe', newEmail: 'new@test.com' });
 
-    const response = await saveProfile('old@test.com', undefined, formData);
+    const response = await saveProfile(undefined, formData);
 
     expect(response).toEqual({ success: true, data: undefined });
     expect(profileService.changeEmail).toHaveBeenCalledWith('new@test.com');
@@ -113,7 +130,7 @@ describe('profile.action - saveProfile', () => {
       newPassword: 'NewPassword1!',
     });
 
-    const response = await saveProfile('user@test.com', undefined, formData);
+    const response = await saveProfile(undefined, formData);
 
     expect(response).toEqual({ success: true, data: undefined });
     expect(profileService.setPassword).toHaveBeenCalledWith('NewPassword1!');
@@ -127,7 +144,7 @@ describe('profile.action - saveProfile', () => {
       newPassword: 'weak',
     });
 
-    const response = await saveProfile('user@test.com', undefined, formData);
+    const response = await saveProfile(undefined, formData);
 
     expect(response).toMatchObject({
       success: false,
@@ -142,10 +159,13 @@ describe('profile.action - saveProfile', () => {
     jest
       .mocked(profileService.updateUser)
       .mockRejectedValue(new Error('DB connection failed'));
-    const formData = buildFormData({ username: 'johndoe', newEmail: 'user@test.com' });
+    const formData = buildFormData({
+      username: 'newusername',
+      newEmail: 'user@test.com',
+    });
 
-    await expect(
-      saveProfile('user@test.com', undefined, formData),
-    ).rejects.toThrow('DB connection failed');
+    await expect(saveProfile(undefined, formData)).rejects.toThrow(
+      'DB connection failed',
+    );
   });
 });

@@ -15,10 +15,7 @@ import { useActionState, useEffect, useRef } from 'react';
 const ProfileForm = ({ username, email }: User): React.ReactNode => {
   const newPasswordRef = useRef<HTMLInputElement>(null);
 
-  const [state, formAction, isPending] = useActionState(
-    saveProfile.bind(null, email),
-    undefined,
-  );
+  const [state, formAction, isPending] = useActionState(saveProfile, undefined);
 
   const errors = state && !state.success ? state.fieldErrors : undefined;
 

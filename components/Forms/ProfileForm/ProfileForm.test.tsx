@@ -61,7 +61,7 @@ describe('ProfileForm', () => {
     ).toBeInTheDocument();
   });
 
-  it('should submit the form fields and pass the current email to saveProfile', async () => {
+  it('should submit the form fields to saveProfile', async () => {
     jest
       .mocked(saveProfile)
       .mockResolvedValue({ success: true, data: undefined });
@@ -76,8 +76,7 @@ describe('ProfileForm', () => {
 
     await screen.findByText('Profil mis à jour.');
 
-    const [email, , formData] = jest.mocked(saveProfile).mock.calls[0];
-    expect(email).toBe('user@test.com');
+    const [, formData] = jest.mocked(saveProfile).mock.calls[0];
     expect(formData.get('username')).toBe('newusername');
     expect(formData.get('newEmail')).toBe('user@test.com');
     expect(formData.get('newPassword')).toBe('NewPassword1!');
